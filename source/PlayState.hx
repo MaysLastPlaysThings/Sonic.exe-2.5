@@ -160,6 +160,7 @@ class PlayState extends MusicBeatState
 	public static var isPixelStage:Bool = false;
 	public static var SONG:SwagSong = null;
 	public static var isStoryMode:Bool = false;
+	public static var isEncore:Bool = false;
 	public static var storyWeek:Int = 0;
 	public static var storyPlaylist:Array<String> = [];
 	public static var storyDifficulty:Int = 1;
@@ -5943,6 +5944,18 @@ class PlayState extends MusicBeatState
 				Highscore.saveScore(SONG.song, songScore, storyDifficulty, percent);
 				#end
 			}
+
+   if (isEncore) {
+				campaignScore += songScore;
+				campaignMisses += songMisses;
+				FlxG.sound.playMusic(Paths.music('freakyMenu'));
+				cancelFadeTween();
+				MusicBeatState.switchState(new EncoreState());
+				usedPractice = false;
+				changedDifficulty = false;
+				cpuControlled = false;
+			transitioning = true;  
+}
 
 			if (isStoryMode)
 			{
