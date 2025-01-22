@@ -158,6 +158,7 @@ class EncoreState extends MusicBeatState // REWRITE FREEPLAY!?!?!? HELL YEA!!!!!
 			}
 
 			PlayState.isStoryMode = false;
+			PlayState.isEncore = true;
 			PlayState.storyDifficulty = 2;
 			PlayState.storyWeek = 1;
 			FlxTween.tween(whiteshit, {alpha: 1}, 0.4);
