@@ -48,7 +48,7 @@ class Intro extends MusicBeatState
       FlxG.sound.muteKeys = [];
   		FlxG.sound.volumeDownKeys = [];
   		FlxG.sound.volumeUpKeys = [];
-        var video = new VideoHandler();
+        var video:VideoHandler = new VideoHandler();
         video.canSkip=false;
 		video.finishCallback = function()
 		{
