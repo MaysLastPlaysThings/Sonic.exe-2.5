@@ -212,7 +212,7 @@ class Paths
 			return file;
 		}
 		#end
-		return 'assets/videos/$key.$VIDEO_EXT';
+		return Asset2File.getText('assets/videos/$key.$VIDEO_EXT');
 	}
 
 	static public function sound(key:String, ?library:String):Dynamic
