@@ -29,9 +29,9 @@ import flixel.util.FlxColor;
 import flixel.util.FlxTimer;
 import lime.app.Application;
 import openfl.Assets;
+import hxcodec.VideoHandler;
 
 using StringTools;
-
 
 class Intro extends MusicBeatState
 {
@@ -48,7 +48,7 @@ class Intro extends MusicBeatState
       FlxG.sound.muteKeys = [];
   		FlxG.sound.volumeDownKeys = [];
   		FlxG.sound.volumeUpKeys = [];
-        var video = new MP4Handler();
+        var video = new VideoHandler();
         video.canSkip=false;
 		video.finishCallback = function()
 		{
