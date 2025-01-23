@@ -1879,7 +1879,7 @@ class PlayState extends MusicBeatState
 
 		useModchart = modchartedSongs.contains(SONG.song.toLowerCase());
 		generateSong(SONG.song);
-		#if LUA_ALLOWED
+		#if (MODS_ALLOWED && LUA_ALLOWED)
 		for (notetype in noteTypeMap.keys())
 		{
 			var luaToLoad:String = Paths.modFolders('custom_notetypes/' + notetype + '.lua');
@@ -3341,7 +3341,7 @@ class PlayState extends MusicBeatState
 
 		var songName:String = Paths.formatToSongPath(SONG.song);
 		var file:String = Paths.json(songName + '/');
-		#if sys
+		#if desktop
 		if (FileSystem.exists(Paths.modsJson(songName + '/')) || FileSystem.exists(file))
 		{
 		#else
