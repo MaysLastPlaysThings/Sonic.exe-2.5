@@ -70,10 +70,10 @@ import flixel.group.FlxSpriteGroup.FlxTypedSpriteGroup;
 import flixel.tweens.FlxTween.FlxTweenManager;
 import flixel.system.scaleModes.StageSizeScaleMode;
 import flixel.system.scaleModes.BaseScaleMode;
-using StringTools;
-
 import hxcodec.VideoHander;
 import hxcodec.VideoSprite;
+
+using StringTools;
 
 #if desktop
 import Discord.DiscordClient;
