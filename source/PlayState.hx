@@ -5945,18 +5945,6 @@ class PlayState extends MusicBeatState
 				#end
 			}
 
-   if (isEncore) {
-				campaignScore += songScore;
-				campaignMisses += songMisses;
-				FlxG.sound.playMusic(Paths.music('freakyMenu'));
-				cancelFadeTween();
-				MusicBeatState.switchState(new EncoreState());
-				usedPractice = false;
-				changedDifficulty = false;
-				cpuControlled = false;
-			transitioning = true;  
-}
-
 			if (isStoryMode)
 			{
 				campaignScore += songScore;
@@ -6021,6 +6009,18 @@ class PlayState extends MusicBeatState
 						LoadingState.loadAndSwitchState(new PlayState());
 					}
 				}
+			}
+			else if (isEncore)
+			{
+			campaignScore += songScore;
+			campaignMisses += songMisses;
+			FlxG.sound.playMusic(Paths.music('freakyMenu'));
+			cancelFadeTween();
+			MusicBeatState.switchState(new EncoreState());
+			usedPractice = false;
+			changedDifficulty = false;
+			cpuControlled = false;
+			transitioning = true;  
 			}
 			else
 			{
