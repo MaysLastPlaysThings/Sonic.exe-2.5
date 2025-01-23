@@ -2299,10 +2299,7 @@ class PlayState extends MusicBeatState
 
 		#if LUA_ALLOWED
 		var doPush:Bool = false;
-		if (SONG.song.toLowerCase() == 'perdition')
-		var luaFile:String = 'data/' + Paths.formatToSongPath(SONG.song) + '/modchart.lua';
-		else
-		var luaFile:String = 'data/' + Paths.formatToSongPath(SONG.song) + '/script.lua';
+		var luaFile:String = 	'data/' + Paths.formatToSongPath(SONG.song) + '/script.lua';
 
 			luaFile = Paths.getPreloadPath(luaFile);
 			if (OpenFlAssets.exists(luaFile))
