@@ -4,6 +4,7 @@ import haxe.PosInfos;
 import sys.io.File;
 import sys.FileSystem;
 import openfl.Lib; // I FORGOR
+import mobile.utils.Asset2File;
 
 using StringTools; // AGAIN
 
