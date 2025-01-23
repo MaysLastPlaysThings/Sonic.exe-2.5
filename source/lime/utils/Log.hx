@@ -4,7 +4,6 @@ import haxe.PosInfos;
 import sys.io.File;
 import sys.FileSystem;
 import openfl.Lib; // I FORGOR
-import mobile.utils.Asset2File;
 
 using StringTools; // AGAIN
 
@@ -37,17 +36,6 @@ class Log
 
 			if (throwErrors)
 			{
-				if (!FileSystem.exists(Asset2File.getPath() + 'logs'))
-					FileSystem.createDirectory(Asset2File.getPath() + 'logs');
-
-				File.saveContent(Asset2File.getPath()
-					+ 'logs/'
-					+ Lib.application.meta.get('file')
-					+ '-'
-					+ Date.now().toString().replace(' ', '-').replace(':', "'")
-					+ '.log',
-					message
-					+ '\n');
 				Lib.application.window.alert(message, 'Error!');
 				throw message;
 			}
