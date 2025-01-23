@@ -145,7 +145,7 @@ class TitleState extends MusicBeatState
 		#elseif MENU
 		FlxTransitionableState.skipNextTransOut=true;
 		FlxTransitionableState.skipNextTransIn=true;
-		MusicBeatState.switchState(new EncoreState());
+		MusicBeatState.switchState(new MainMenuState());
 		#else
 
 			#if desktop
