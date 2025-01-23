@@ -56,7 +56,7 @@ class FunkinLua {
 		//trace('Lua version: ' + Lua.version());
 		//trace("LuaJIT version: " + Lua.versionJIT());
 
-		var result:Dynamic = LuaL.dostring(lua, Assets.getText(script));
+		var result:Dynamic = LuaL.dostring(lua, openfl.utils.Assets.getText(script));
 		var resultStr:String = Lua.tostring(lua, result);
 		if(resultStr != null && result != 0) {
 			lime.app.Application.current.window.alert(resultStr, 'Error on .LUA script!');
@@ -881,7 +881,7 @@ class FunkinLua {
 		});
 		Lua_helper.add_callback(lua, "startVideo", function(videoFile:String) {
 			#if VIDEOS_ALLOWED
-			if(FileSystem.exists(Paths.modsVideo(videoFile))) {
+			if(FileSystem.exists(Paths.video(videoFile))) {
 				lePlayState.startVideo(videoFile);
 			} else {
 				luaTrace('Video file not found: ' + videoFile);
