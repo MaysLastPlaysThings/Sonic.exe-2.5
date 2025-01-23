@@ -19,6 +19,7 @@ import sys.FileSystem;
 #end
 import flixel.graphics.FlxGraphic;
 import openfl.display.BitmapData;
+import mobile.utils.Asset2File;
 
 import flash.media.Sound;
 
