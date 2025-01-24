@@ -358,6 +358,8 @@ class PauseSubState extends MusicBeatSubstate
 						}
 						PlayState.deathCounter = 0;
 						PlayState.seenCutscene = false;
+						if (PlayState.isEncore)
+						MusicBeatState.switchState(new EncoreState());
 						if(PlayState.isStoryMode) {
 							MusicBeatState.switchState(new StoryMenuState());
 						} else {
