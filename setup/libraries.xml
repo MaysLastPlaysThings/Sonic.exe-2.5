@@ -8,5 +8,5 @@
  <haxelib name="hscript" version="2.5.0"/>
  <haxelib name="hxCodec" version="2.6.1"/>
  <git name="hxcpp" url="https://github.com/HaxeFoundation/hxcpp"/>
- <git name="linc_luajit" url="https://github.com/mcagabe19/linc_luajit-rewriten"/>
+ <git name="linc_luajit" url="https://github.com/MaysLastPlays-Stuff/linc_luajit"/>
  </libraries>
