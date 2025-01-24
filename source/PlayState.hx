@@ -7321,6 +7321,7 @@ class PlayState extends MusicBeatState
 				case 1280:
 					//goofyAhhStatic(1);
 				case 1296:
+				triggerEventNote('strum swap1', 'dad', 'bf');
 					timeBar.createFilledBar(0x00AD0E0E, 0xFFAD0E0E);
 					timeBar.updateBar();
 
@@ -7380,6 +7381,7 @@ class PlayState extends MusicBeatState
 				case 2816:
 					//goofyAhhStatic(1);
 				case 2832:
+				triggerEventNote('strum swap2', 'bf', 'dad');
 					timeBar.createFilledBar(0x00A87608, 0xFFA87608);
 					timeBar.updateBar();
 
@@ -7403,6 +7405,19 @@ class PlayState extends MusicBeatState
 				case 4111:
 					timeBar.createFilledBar(0x00D416E3, 0xFFD416E3);
 					timeBar.updateBar();
+
+          triggerEventNote('Change Character', 'dad', 'BEAST');
+          triggerEventNote('Change Character', 'bf', 'bf-perspective-right');
+	
+					defaultCamZoom = 0.9;
+
+					fgTree1.alpha = 0;
+					fgTree2.alpha = 0;
+
+					backtreesXeno.visible = true;
+					grassXeno.visible = true;
+					p3staticbg.visible = true;
+	
 			}
 		}
 		if (SONG.song.toLowerCase()=='personel')
