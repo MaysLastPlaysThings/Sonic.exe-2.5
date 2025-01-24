@@ -74,7 +74,7 @@ class FPS extends TextField
 		if (mem > peak)
 			peak = mem;
 
-		text += "Memory: " + getSizeLabel(System.totalMemory) + "/" + getSizeLabel(peak) + "\n";
+		text += "Memory: " + getSizeLabel(System.totalMemory) + " / " + getSizeLabel(peak) + "\n";
 	}
 
 	final dataTexts = ["B", "KB", "MB", "GB", "TB", "PB"];
