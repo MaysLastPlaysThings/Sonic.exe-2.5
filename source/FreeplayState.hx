@@ -262,6 +262,7 @@ class FreeplayState extends MusicBeatState // REWRITE FREEPLAY!?!?!? HELL YEA!!!
 
 				PlayState.SONG = Song.loadFromJson(songArray[curSongSelected].toLowerCase() + '-hard', songArray[curSongSelected].toLowerCase());
 				PlayState.isStoryMode = false;
+				PlayState.isEncore = false;
 				PlayState.storyDifficulty = 2;
 				PlayState.storyWeek = 1;
 				FlxG.sound.play(Paths.sound('confirmMenu'));
