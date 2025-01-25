@@ -179,10 +179,10 @@ class SoundTestMenu extends MusicBeatState
 			woahmanstopspammin = false;
 			PlayState.SONG = Song.loadFromJson('endless-hard', 'endless');
 			PlayState.isStoryMode = false;
+			PlayState.isEncore = false;
 			PlayState.storyDifficulty = 2;
 			PlayState.storyWeek = 1;
-			           
-			           
+
 			flashyWashy(true);
 			new FlxTimer().start(2, function(tmr:FlxTimer)
 			{
@@ -196,6 +196,7 @@ class SoundTestMenu extends MusicBeatState
 
 				PlayState.SONG = Song.loadFromJson('cycles-hard', 'cycles');
 				PlayState.isStoryMode = false;
+			  PlayState.isEncore = false;
 				PlayState.storyDifficulty = 2;
 				PlayState.storyWeek = 1;
 				           
@@ -213,6 +214,7 @@ class SoundTestMenu extends MusicBeatState
 
 				PlayState.SONG = Song.loadFromJson('sunshine', 'sunshine');
 				PlayState.isStoryMode = false;
+		  	PlayState.isEncore = false;
 				PlayState.storyDifficulty = 2;
 				PlayState.storyWeek = 1;
 				           
@@ -230,6 +232,7 @@ class SoundTestMenu extends MusicBeatState
 
 				PlayState.SONG = Song.loadFromJson('chaos-hard', 'chaos');
 				PlayState.isStoryMode = false;
+		    PlayState.isEncore = false;
 				PlayState.storyDifficulty = 2;
 				PlayState.storyWeek = 1;
 				           
@@ -247,6 +250,7 @@ class SoundTestMenu extends MusicBeatState
 
 				PlayState.SONG = Song.loadFromJson('too-fest-hard', 'too-fest');
 				PlayState.isStoryMode = false;
+			  PlayState.isEncore = false;
 				PlayState.storyDifficulty = 2;
 				PlayState.storyWeek = 1;
 				           
@@ -395,6 +399,7 @@ class SoundTestMenu extends MusicBeatState
 					PlayStateChangeables.nocheese = false;
 					PlayState.SONG = Song.loadFromJson('personel-hard', 'personel');
 					PlayState.isStoryMode = false;
+		    	PlayState.isEncore = false;
 					PlayState.storyDifficulty = 2;
 					PlayState.storyWeek = 1;
 					
