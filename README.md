@@ -7,4 +7,4 @@ Thanks for playing the Sonic.exe mod lol.
 * Add Touch/Swipe support on menus
 * Add Controls and 5k hitbox (for Triple Trouble)
 * Finish Triple Trouble (I'll cook it, -Mays) - Done
-Fix Credits appearing
+* Fix Credits appearing
