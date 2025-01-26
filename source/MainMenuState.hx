@@ -110,8 +110,6 @@ class MainMenuState extends MusicBeatState
 		camFollow = new FlxObject(0, 0, 1, 1);
 		add(camFollow);
 
-
-
 		menuItems = new FlxTypedGroup<FlxSprite>();
 		add(menuItems);
 
@@ -172,7 +170,6 @@ class MainMenuState extends MusicBeatState
 			xval = xval + 70;
 		}
 
-
 		firstStart = false;
 
 		FlxG.camera.follow(camFollow, null, 0.60 * (60 / FlxG.save.data.fpsCap));
@@ -181,8 +178,6 @@ class MainMenuState extends MusicBeatState
 		dataerase.scrollFactor.set();
 		dataerase.setFormat("VCR OSD Mono", 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		add(dataerase);
-
-		// NG.core.calls.event.logEvent('swag').send();
 
 		changeItem();
 
@@ -212,8 +207,6 @@ class MainMenuState extends MusicBeatState
 				}
 			});
 		}
-
-
 
 		if (FlxG.sound.music.volume < 0.8)
 		{
@@ -287,10 +280,13 @@ class MainMenuState extends MusicBeatState
 										MusicBeatState.switchState(new FreeplayState());
 									case 'encore':
 										MusicBeatState.switchState(new EncoreState());
-									case 'sound_test':										
-										MusicBeatState.switchState(new SoundTestMenu());									
+									case 'sound_test':
+										MusicBeatState.switchState(new SoundTestMenu());			
 									case 'options':
 										MusicBeatState.switchState(new OptionsState());
+										case 'extras':
+										Application.current.window.alert('Extras Menu is unfinished! \n Press OK to return to Main Menu.', 'WARNING!');
+										MusicBeatState.switchState(new MainMenuState());
 								}
 							});
 						}
