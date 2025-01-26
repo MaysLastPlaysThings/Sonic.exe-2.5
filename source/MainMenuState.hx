@@ -24,7 +24,7 @@ using StringTools;
 
 class MainMenuState extends MusicBeatState
 {
-	public static var psychEngineVersion:String = '0.4.2'; //This is also used for Discord RPC
+	public static var psychEngineVersion:String = '0.5'; //This is also used for Discord RPC
 	var curSelected:Int = 0;
 
 	var xval:Int = 585;
@@ -38,8 +38,7 @@ class MainMenuState extends MusicBeatState
 		'encore',
 		'freeplay',
 		'sound_test',
-		'options',
-		'extras'
+		'options'
 	];
 
 	var newGaming:FlxText;
@@ -284,9 +283,6 @@ class MainMenuState extends MusicBeatState
 										MusicBeatState.switchState(new SoundTestMenu());			
 									case 'options':
 										MusicBeatState.switchState(new OptionsState());
-										case 'extras':
-										Application.current.window.alert('Extras Menu is unfinished! \n Press OK to return to Main Menu.', 'WARNING!');
-										MusicBeatState.switchState(new MainMenuState());
 								}
 							});
 						}
