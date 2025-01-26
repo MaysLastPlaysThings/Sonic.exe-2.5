@@ -4109,17 +4109,17 @@ class PlayState extends MusicBeatState
 	 switch (SONG.song.toLowerCase()) //ass code
 		{
 			case 'fight or flight':
-				scoreTxt.text = 'Sacrifices: ' + songMisses + ' | Accuracy: ';
-				if (ratingString != '?')
-					scoreTxt.text += '' + ((Math.floor(ratingPercent * 10000) / 100)) + '%';
-				if (songMisses <= 0)
-					scoreTxt.text += ratingString;
+			if (ratingString == '?'){
+				scoreTxt.text = 'Sacrifices: ' + songScore + ' | Combo Breaks: ' + songMisses + ' | Accuracy: ' + ratingString;
+			} else {
+				scoreTxt.text = 'Sacrifices: ' + songScore + ' | Combo Breaks: ' + songMisses + ' | Accuracy: ' + ((Math.floor(ratingPercent * 10000) / 100)) + '%' + ratingString;
+			}
 			default:
-					scoreTxt.text = 'Score: ' + songScore + ' | Combo Breaks: ' + songMisses + ' | Accuracy: ';
-				if (ratingString != '?')
-					scoreTxt.text += '' + ((Math.floor(ratingPercent * 10000) / 100)) + '%';
-				if (songMisses <= 0)
-					scoreTxt.text += ratingString;
+			if (ratingString == '?'){
+				scoreTxt.text = 'Score: ' + songScore + ' | Combo Breaks: ' + songMisses + ' | Accuracy: ' + ratingString;
+			} else {
+				scoreTxt.text = 'Score: ' + songScore + ' | Combo Breaks: ' + songMisses + ' | Accuracy: ' + ((Math.floor(ratingPercent * 10000) / 100)) + '%' + ratingString;
+			}
 		}
 		if (cpuControlled)
 			{
