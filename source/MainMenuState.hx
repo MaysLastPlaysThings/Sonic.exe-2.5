@@ -58,20 +58,8 @@ class MainMenuState extends MusicBeatState
 
 	override function create()
 	{
-		/*#if debug
-		optionShit.push('sound test');
-		#else
-		optionShit.push('sound test locked');
-		#end
-		if(!ClientPrefs.beatweek){
-			optionShit.push('sound_test locked');
-			optionShit.push('encore locked');
-		}
-		else{
-			optionShit.push('sound_test');
-			optionShit.push('encore');
-		}*/
-
+	 Paths.clearUnusedMemory();
+	 Paths.clearStoredMemory();
 
 		#if windows
 		// Updating Discord Rich Presence
@@ -103,8 +91,6 @@ class MainMenuState extends MusicBeatState
 		bgdesat.antialiasing = true;
 		bgdesat.color = 0xFFfd719b;
 		add(bgdesat);
-		// bgdesat.scrollFactor.set();
-
 
 		camFollow = new FlxObject(0, 0, 1, 1);
 		add(camFollow);
@@ -112,13 +98,7 @@ class MainMenuState extends MusicBeatState
 		menuItems = new FlxTypedGroup<FlxSprite>();
 		add(menuItems);
 
-		menuItems = new FlxTypedGroup<FlxSprite>();
-		add(menuItems);
-
 		var scale:Float = 1;
-		/*if(optionShit.length > 6) {
-			scale = 6 / optionShit.length;
-		}*/
 
 		for (i in 0...optionShit.length)
 		{
@@ -130,7 +110,6 @@ class MainMenuState extends MusicBeatState
 			menuItem.animation.addByPrefix('selected', optionShit[i] + " white", 24);
 			menuItem.animation.addByPrefix('lock', optionShit[i] + " locked", 24);
 		if (!ClientPrefs.beatweek && optionShit[i] == 'sound_test') {
-				//menuItem.color = FlxColor.fromHSL(menuItem.color.hue, menuItem.color.saturation, 0.2, 1);
 				menuItem.animation.play('lock');
 				menuItem.animation.addByPrefix('idle', optionShit[i] + " locked", 24);
 			}
@@ -139,7 +118,7 @@ class MainMenuState extends MusicBeatState
 				menuItem.animation.addByPrefix('idle', optionShit[i] + " basic", 24);
 				menuItem.animation.play('idle');
 			}
-			
+
 			menuItem.ID = i;
 			menuItem.screenCenter(X);
 			menuItems.add(menuItem);
@@ -147,11 +126,8 @@ class MainMenuState extends MusicBeatState
 			if(optionShit.length < 6) scr = 0;
 			menuItem.scrollFactor.set(0, scr);
 			menuItem.antialiasing = ClientPrefs.globalAntialiasing;
-			//menuItem.setGraphicSize(Std.int(menuItem.width * 0.58));
 			menuItem.updateHitbox();
 
-			
-			
 			if (firstStart)
 				FlxTween.tween(menuItem,{x: xval},1 + (i * 0.25) ,{ease: FlxEase.expoInOut, onComplete: function(flxTween:FlxTween)
 					{
@@ -195,7 +171,7 @@ class MainMenuState extends MusicBeatState
 				urmom += 1;
 				if (urmom == 30)
 				{
-					FlxG.save.data.storyProgress = 0; // lol.
+					FlxG.save.data.storyProgress = 0;
 					FlxG.save.data.soundTestUnlocked = false;
 					FlxG.save.data.songArray = [];
 					FlxG.switchState(new MainMenuState());
@@ -292,17 +268,14 @@ class MainMenuState extends MusicBeatState
 			if (FlxG.keys.justPressed.SIX)
 			{
 				MusicBeatState.switchState(new EncoreState());
-				//changeItem(1);
 			}
 			if (FlxG.keys.justPressed.SEVEN)
 			{
 				MusicBeatState.switchState(new MasterEditorMenu());
-				//changeItem(1);
 			}
 			if (FlxG.keys.justPressed.EIGHT)
 			{
 				MusicBeatState.switchState(new FreeplayState());
-				//changeItem(1);
 			}
 		}
 
@@ -319,9 +292,8 @@ class MainMenuState extends MusicBeatState
 				curSelected = 0;
 			if (curSelected < 0)
 				curSelected = menuItems.length - 1;
-			
-			
 		}
+
 		menuItems.forEach(function(spr:FlxSprite)
 		{
 			var daChoice:String = optionShit[curSelected];
@@ -329,17 +301,7 @@ class MainMenuState extends MusicBeatState
 					spr.animation.play('lock');
 				}
 			spr.animation.play('idle');
-			
-			/*
-			if (huh != 0)
-			{
-				FlxTween.cancelTweensOf(spr);
-			}
-			FlxTween.tween(spr, {x: 100 + ((curSelected * -1 + spr.ID + 1) * 220) , y: 40 + ((curSelected * -1 + spr.ID + 1) * 140)}, 0.2);
-			*/
 
-			
-			
 			if (spr.ID == curSelected && finishedFunnyMove)
 			{
 				if(!ClientPrefs.beatweek && daChoice == 'sound_test'){
@@ -349,7 +311,6 @@ class MainMenuState extends MusicBeatState
 				spr.animation.play('selected');
 				camFollow.setPosition(spr.getGraphicMidpoint().x, spr.getGraphicMidpoint().y);
 			}
-
 			spr.updateHitbox();
 		});
 	}
