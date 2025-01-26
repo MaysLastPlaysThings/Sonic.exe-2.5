@@ -1806,7 +1806,7 @@ class PlayState extends MusicBeatState
 		}
 		for (event in eventPushedMap.keys())
 		{
-			var luaToLoad:String = Paths.modFolders('custom_/' + event + '.lua');
+			var luaToLoad:String = Paths.modFolders('custom_events/' + event + '.lua');
 			if (FileSystem.exists(luaToLoad))
 			{
 				luaArray.push(new FunkinLua(luaToLoad));
