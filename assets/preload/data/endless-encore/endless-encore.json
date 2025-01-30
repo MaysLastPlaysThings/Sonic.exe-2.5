@@ -7511,7 +7511,7 @@
 				"mustHitSection": true
 			}
 		],
-		"player2": "majin",
+		"player2": "majin_new",
 		"gfVersion": "gf",
 		"player3": null,
 		"initialSpeed": 1.305,
