@@ -7519,7 +7519,7 @@
 		"song": "endless-encore",
 		"needsVoices": true,
 		"validScore": true,
-		"stage": "endless",
+		"stage": "endless-forest",
 		"speed": 2.9,
 		"bpm": 158
 	}
