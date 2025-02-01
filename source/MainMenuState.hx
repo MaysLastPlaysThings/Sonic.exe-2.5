@@ -15,6 +15,7 @@ import editors.MasterEditorMenu;
 import flixel.util.FlxColor;
 import flixel.util.FlxTimer;
 import lime.app.Application;
+import mobile.utils.TouchInput;
 
 #if windows
 import Discord.DiscordClient;
@@ -189,26 +190,26 @@ class MainMenuState extends MusicBeatState
 		}
 		if (!selectedSomethin)
 		{
-				if (controls.UI_UP_P || FlxG.keys.justPressed.W)
+				if (controls.UI_UP_P || TouchInput.isSwipe('up') || FlxG.keys.justPressed.W)
 				{
 					FlxG.sound.play(Paths.sound('scrollMenu'));
 					changeItem(-1);
 				}
 
-				if (controls.UI_UP_P || FlxG.keys.justPressed.S)
+				if (controls.UI_DOWN_P || TouchInput.isSwipe('down') || FlxG.keys.justPressed.S)
 				{
 					FlxG.sound.play(Paths.sound('scrollMenu'));
 					changeItem(1);
 				}
 
-				if (FlxG.keys.justPressed.BACKSPACE || controls.BACK)
+				if (FlxG.keys.justPressed.BACKSPACE || controls.BACK || TouchInput.BACK)
 				{
 					selectedSomethin = true;
 					FlxG.sound.play(Paths.sound('cancelMenu'));
 					MusicBeatState.switchState(new TitleState());
 				}
 
-		if (controls.ACCEPT || FlxG.keys.justPressed.SPACE)
+		if (controls.ACCEPT || TouchInput.justPressed(menuItems.members[curSelected]) || FlxG.keys.justPressed.SPACE)
 			{
 				if (optionShit[curSelected] == 'donate')
 				{
