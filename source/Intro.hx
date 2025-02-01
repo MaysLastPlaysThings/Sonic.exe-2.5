@@ -37,6 +37,9 @@ class Intro extends MusicBeatState
 {
     override public function create()
     {
+		#if mobile
+		FlxG.android.preventDefaultKeys = [BACK];
+		#end
       var div:FlxSprite;
       div = new FlxSprite();
       div.loadGraphic(Paths.image("cameostuff/divide"));
