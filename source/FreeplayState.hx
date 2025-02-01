@@ -16,7 +16,6 @@ import flixel.tweens.FlxEase;
 import flixel.tweens.FlxTween;
 import lime.utils.Assets;
 import flixel.system.FlxSound;
-import sys.FileSystem;
 import flixel.addons.display.FlxBackdrop;
 import flixel.addons.effects.FlxSkewedSprite;
 
@@ -30,42 +29,25 @@ using StringTools;
 class FreeplayState extends MusicBeatState // REWRITE FREEPLAY!?!?!? HELL YEA!!!!!
 {
 	var whiteshit:FlxSprite;
-
 	var curSelected:Int = 0;
-
 	var curSongSelected:Int = 0;
-
 	var textgrp:FlxTypedGroup<FlxText>;
-
 	var charArray:Array<String>;
-
 	var charUnlocked:Array<String>;
-
 	var boxgrp:SkewSpriteGroup;
-
 	var bg:FlxSprite;
-	
 	var scrollingBg:FlxBackdrop;
-
 	var cdman:Bool = true;
-
 	var fuck:Int = 0;
-
 	var selecting:Bool = false;
-
 	var charText:FlxText;
-
 	var scoreText:FlxText;
 
 	private static var vocals:FlxSound = null;
 
-
 	override function create()
 	{
 		CharSongList.init();
-
-
-		//charArray = CharSongList.chars;
 
 		whiteshit = new FlxSprite().makeGraphic(1280, 720, FlxColor.WHITE);
 		whiteshit.alpha = 0;
@@ -78,16 +60,10 @@ class FreeplayState extends MusicBeatState // REWRITE FREEPLAY!?!?!? HELL YEA!!!
 		scrollingBg = new FlxBackdrop(Paths.image('sidebar'), 0, 1, false, true);
 		add(scrollingBg);
 
-
 		textgrp = new FlxTypedGroup<FlxText>();
-
 		boxgrp = new SkewSpriteGroup();
-
 		charArray = CharSongList.characters;
-
 		charUnlocked = CharSongList.characters;
-
-
 
 		for (i in 0...charArray.length)
 		{
@@ -103,7 +79,7 @@ class FreeplayState extends MusicBeatState // REWRITE FREEPLAY!?!?!? HELL YEA!!!
 
 				if (charUnlocked.contains(charArray[i]))
 				{
-					if (FileSystem.exists('assets/images/fpstuff/' + charArray[i].toLowerCase() + '.png'))
+					if (Assets.exists('assets/images/fpstuff/' + charArray[i].toLowerCase() + '.png'))
 					{
 						FlxG.log.add(charArray[i] + ' found');
 						var char:FlxSkewedSprite = new FlxSkewedSprite(0, i * 415);
@@ -129,7 +105,6 @@ class FreeplayState extends MusicBeatState // REWRITE FREEPLAY!?!?!? HELL YEA!!!
 					char.ID = i;
 					char.setGraphicSize(Std.int(box.width / 1.7));
 				}
-
 			}
 		}
 
@@ -137,11 +112,7 @@ class FreeplayState extends MusicBeatState // REWRITE FREEPLAY!?!?!? HELL YEA!!!
 
 		var uhhdumbassline:FlxSprite = new FlxSprite(300).makeGraphic(10, 720, FlxColor.BLACK);
 		add(uhhdumbassline);
-
 		add(boxgrp);
-
-		//add(new FlxSprite().loadGraphic(Paths.image("FreePlayShit"))); // do not.
-
 		add(textgrp);
 
 		scoreText = new FlxText(30, 105, FlxG.width, "");
@@ -196,15 +167,13 @@ class FreeplayState extends MusicBeatState // REWRITE FREEPLAY!?!?!? HELL YEA!!!
 	}
 	override function update(elapsed:Float)
 	{
-
 		scrollingBg.y += 1;
 
 		super.update(elapsed);
 
-		var upP = FlxG.keys.justPressed.UP || FlxG.keys.justPressed.W;
-		var downP = FlxG.keys.justPressed.DOWN || FlxG.keys.justPressed.S;
+		var upP = controls.UI_UP_P || FlxG.keys.justPressed.W;
+		var downP = controls.UI_UP_P || FlxG.keys.justPressed.S;
 		var accepted = controls.ACCEPT;
-
 
 		var gamepad:FlxGamepad = FlxG.gamepads.lastActive;
 
@@ -231,8 +200,6 @@ class FreeplayState extends MusicBeatState // REWRITE FREEPLAY!?!?!? HELL YEA!!!
 				changeSelection(1);
 			}
 		}
-
-
 
 		if (controls.BACK)
 		{
@@ -311,9 +278,7 @@ class FreeplayState extends MusicBeatState // REWRITE FREEPLAY!?!?!? HELL YEA!!!
 						}
 					});
 				}
-
 		}
-
 	}
 
 	public static function destroyFreeplayVocals() {
@@ -325,11 +290,6 @@ class FreeplayState extends MusicBeatState // REWRITE FREEPLAY!?!?!? HELL YEA!!!
 
 	function changeSelection(change:Int = 0)
 	{
-
-		#if !switch
-		// NGio.logEvent('Fresh');
-		#end
-
 		if (!selecting)
 		{
 			if (change == 1 && curSelected != charArray.length - 1)
@@ -341,7 +301,6 @@ class FreeplayState extends MusicBeatState // REWRITE FREEPLAY!?!?!? HELL YEA!!!
 						cdman = true;
 					}
 				});
-
 			}
 			else if (change == -1 && curSelected != 0)
 			{
@@ -352,7 +311,6 @@ class FreeplayState extends MusicBeatState // REWRITE FREEPLAY!?!?!? HELL YEA!!!
 						cdman = true;
 					}
 				});
-
 			}
 			if ((change == 1 && curSelected != charArray.length - 1) || (change == -1 && curSelected != 0)) // This is a.
 			{
@@ -401,7 +359,6 @@ class FreeplayState extends MusicBeatState // REWRITE FREEPLAY!?!?!? HELL YEA!!!
 							}
 						}
 					});
-				
 			}
 		}
 		else
@@ -429,14 +386,7 @@ class FreeplayState extends MusicBeatState // REWRITE FREEPLAY!?!?!? HELL YEA!!!
 				}
 			}
 		}
-
-
-		// NGio.logEvent('Fresh');
-
-
-
 	}
-
 }
 
 class SongMetadata
