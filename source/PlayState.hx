@@ -462,6 +462,8 @@ class PlayState extends MusicBeatState
 	var satBgTree:BGSprite;
 	var satBgFlower:BGSprite;
 	var satBgPlant:BGSprite;
+	// faker
+	var fakertransform:FlxSprite;
 
 	public var ringsNumbers:Array<SonicNumber>=[];
 	public var minNumber:SonicNumber;
@@ -1503,6 +1505,136 @@ class PlayState extends MusicBeatState
 				satFgFlower = new FlxSprite(-1300, -700).loadGraphic(Paths.image("satanos/fgFlower"));
 				satFgFlower.setGraphicSize(Std.int(satFgFlower.width * 0.85));
 				satFgFlower.scrollFactor.set(1.1, 0.9);
+				case 'fakerStage': // i fixed the bgs and shit!!! - razencro part 1
+						defaultCamZoom = 0.95;
+
+						var sky:FlxSprite = new FlxSprite(-631.8, -493.15).loadGraphic(Paths.image('fakerBG/sky'));
+						sky.antialiasing = true;
+						sky.scrollFactor.set(1, 1);
+						sky.active = false;
+						sky.scale.x = .9;
+						sky.scale.y = .9;
+						add(sky);
+
+						var mountains:FlxSprite = new FlxSprite(-631.8, -475.5).loadGraphic(Paths.image('fakerBG/mountains'));
+						mountains.antialiasing = true;
+						mountains.scrollFactor.set(1.1, 1);
+						mountains.active = false;
+						mountains.scale.x = .9;
+						mountains.scale.y = .9;
+						add(mountains);
+
+						var grass:FlxSprite = new FlxSprite(-631.8, -475.5).loadGraphic(Paths.image('fakerBG/grass'));
+						grass.antialiasing = true;
+						grass.scrollFactor.set(1.2, 1);
+						grass.active = false;
+						grass.scale.x = .9;
+						grass.scale.y = .9;
+						add(grass);
+
+						var tree2:FlxSprite = new FlxSprite(-631.8, -475.5).loadGraphic(Paths.image('fakerBG/tree2'));
+						tree2.antialiasing = true;
+						tree2.scrollFactor.set(1.225, 1);
+						tree2.active = false;
+						tree2.scale.x = .9;
+						tree2.scale.y = .9;
+						add(tree2);
+
+						var pillar2:FlxSprite = new FlxSprite(-631.8, -459.55).loadGraphic(Paths.image('fakerBG/pillar2'));
+						pillar2.antialiasing = true;
+						pillar2.scrollFactor.set(1.25, 1);
+						pillar2.active = false;
+						pillar2.scale.x = .9;
+						pillar2.scale.y = .9;
+						add(pillar2);
+
+						var plant:FlxSprite = new FlxSprite(-631.8, -493.15).loadGraphic(Paths.image('fakerBG/plant'));
+						plant.antialiasing = true;
+						plant.scrollFactor.set(1.25, 1);
+						plant.active = false;
+						plant.scale.x = .9;
+						plant.scale.y = .9;
+						add(plant);
+
+						var tree1:FlxSprite = new FlxSprite(-631.8, -493.15).loadGraphic(Paths.image('fakerBG/tree1'));
+						tree1.antialiasing = true;
+						tree1.scrollFactor.set(1.25, 1);
+						tree1.active = false;
+						tree1.scale.x = .9;
+						tree1.scale.y = .9;
+						add(tree1);
+
+						var pillar1:FlxSprite = new FlxSprite(-631.8, -493.15).loadGraphic(Paths.image('fakerBG/pillar1'));
+						pillar1.antialiasing = true;
+						pillar1.scrollFactor.set(1.25, 1);
+						pillar1.active = false;
+						pillar1.scale.x = .9;
+						pillar1.scale.y = .9;
+						add(pillar1);
+
+						var flower1:FlxSprite = new FlxSprite(-631.8, -493.15).loadGraphic(Paths.image('fakerBG/flower1'));
+						flower1.antialiasing = true;
+						flower1.scrollFactor.set(1.25, 1);
+						flower1.active = false;
+						flower1.scale.x = .9;
+						flower1.scale.y = .9;
+						add(flower1);
+
+						var flower2:FlxSprite = new FlxSprite(-631.8, -493.15).loadGraphic(Paths.image('fakerBG/flower2'));
+						flower2.antialiasing = true;
+						flower2.scrollFactor.set(1.25, 1);
+						flower2.active = false;
+						flower2.scale.x = .9;
+						flower2.scale.y = .9;
+						add(flower2);
+
+				case 'exeStage': // if this doesn't work i swear i will beat krillin to death /j
+						defaultCamZoom = 0.9;
+
+						var sSKY:FlxSprite = new FlxSprite(-414, -240.8).loadGraphic(Paths.image('exeBg/sky'));
+						sSKY.antialiasing = true;
+						sSKY.scrollFactor.set(1, 1);
+						sSKY.active = false;
+						sSKY.scale.x = 1.2;
+						sSKY.scale.y = 1.2;
+						add(sSKY);
+
+						var trees:FlxSprite = new FlxSprite(-290.55, -298.3).loadGraphic(Paths.image('exeBg/backtrees'));
+						trees.antialiasing = true;
+						trees.scrollFactor.set(1.1, 1);
+						trees.active = false;
+						trees.scale.x = 1.2;
+						trees.scale.y = 1.2;
+						add(trees);
+
+						var bg2:FlxSprite = new FlxSprite(-306, -334.65).loadGraphic(Paths.image('exeBg/trees'));
+						bg2.updateHitbox();
+						bg2.antialiasing = true;
+						bg2.scrollFactor.set(1.2, 1);
+						bg2.active = false;
+						bg2.scale.x = 1.2;
+						bg2.scale.y = 1.2;
+						add(bg2);
+
+						var bg:FlxSprite = new FlxSprite(-309.95, -240.2).loadGraphic(Paths.image('exeBg/ground'));
+						bg.antialiasing = true;
+						bg.scrollFactor.set(1.3, 1);
+						bg.active = false;
+						bg.scale.x = 1.2;
+						bg.scale.y = 1.2;
+						add(bg);
+
+						var treething:FlxSprite = new FlxSprite(-409.95, -340.2);
+						treething.frames = Paths.getSparrowAtlas('exeBg/ExeAnimatedBG_Assets');
+						treething.animation.addByPrefix('a', 'ExeBGAnim', 24, true);
+						treething.antialiasing = true;
+						treething.scrollFactor.set(1, 1);
+						add(treething);
+
+						var tails:FlxSprite = new FlxSprite(700, 500).loadGraphic(Paths.image('exeBg/TailsCorpse'));
+						tails.antialiasing = true;
+						tails.scrollFactor.set(1, 1);
+						add(tails);
 			default:
 				//oOOOoO nothing!
 		}
@@ -1842,6 +1974,12 @@ class PlayState extends MusicBeatState
 			FlxG.camera.follow(camFollowPos, LOCKON, 0.06 * (30 / (cast(Lib.current.getChildAt(0), Main)).getFPS()));
 		}
 
+	 /*if (curSong.toLowerCase() == 'faker')
+		{
+			fakertransform.setPosition(dad.getGraphicMidpoint().x - 400, dad.getGraphicMidpoint().y - 400);
+			FlxG.camera.follow(camFollow, LOCKON, 0.04 * (30 / (cast(Lib.current.getChildAt(0), Main)).getFPS()));
+		}*/
+
 		FlxG.camera.follow(camFollowPos, LOCKON, 1);
 		// FlxG.camera.setScrollBounds(0, FlxG.width, 0, FlxG.height);
 		FlxG.camera.zoom = defaultCamZoom;
@@ -1956,6 +2094,21 @@ class PlayState extends MusicBeatState
 			add(fearBar);
 			add(fearUi);
 		}
+
+		/*if (SONG.song.toLowerCase() == 'faker')
+			{
+				fakertransform = new FlxSprite(100 - 10000, 100 - 10000);
+				fakertransform.frames = Paths.getSparrowAtlas('Faker_Transformation');
+				fakertransform.animation.addByPrefix('1', 'TransformationRIGHT instance 1');
+				fakertransform.animation.addByPrefix('2', 'TransformationLEFT instance 1');
+				fakertransform.animation.addByPrefix('3', 'TransformationUP instance 1');
+				fakertransform.animation.addByPrefix('4', 'TransformationDOWN instance 1');
+				fakertransform.animation.play('1', true);
+				fakertransform.animation.play('2', true);
+				fakertransform.animation.play('3', true);
+				fakertransform.animation.play('4', true);
+				fakertransform.alpha = 0;
+			}*/
 
 		if (SONG.song.toLowerCase() == 'chaos')
 			{
@@ -3840,7 +3993,7 @@ class PlayState extends MusicBeatState
 			switch (char.curCharacter)
 			{
 				case "scorched":
-					FlxG.camera.zoom = FlxMath.lerp(0.5, FlxG.camera.zoom, CoolUtil.boundTo(1 - (elapsed * 3.125), 0, 1));
+					FlxG.zoom = FlxMath.lerp(0.5, FlxG.camera.zoom, CoolUtil.boundTo(1 - (elapsed * 3.125), 0, 1));
 					camFollow.x += 20;
 					camFollow.y += 70;
 				case "starved":
