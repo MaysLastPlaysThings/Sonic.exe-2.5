@@ -1584,7 +1584,7 @@ class PlayState extends MusicBeatState
 				add(hogRocks);
 				add(hogOverlay);
 				hogOverlay.blend = LIGHTEN;
-			case 'xterion' | 'starved-pixel' | 'starved' | 'chamber' | 'sanicStage' | 'void' | 'fatality' | 'cycles-hills':
+			case 'xterion' | 'starved-pixel' | 'starved' | 'chamber' | 'sanicStage' | 'void' | 'fatality' | 'cycles-hills' | 'slash':
 				gfGroup.visible = false;
 			}
 		trace(boyfriendGroup);
