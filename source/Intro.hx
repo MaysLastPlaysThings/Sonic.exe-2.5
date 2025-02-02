@@ -37,7 +37,7 @@ class Intro extends MusicBeatState
 {
     override public function create()
     {
-		#if mobile
+		#if android // What
 		FlxG.android.preventDefaultKeys = [BACK];
 		#end
       var div:FlxSprite;
