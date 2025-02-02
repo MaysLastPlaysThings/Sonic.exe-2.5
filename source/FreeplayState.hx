@@ -202,7 +202,7 @@ class FreeplayState extends MusicBeatState // REWRITE FREEPLAY!?!?!? HELL YEA!!!
 			}
 		}
 
-		if (controls.BACK || TouchInput.BACK)
+		if (controls.BACK || TouchInput.BACK())
 		{
 			FlxG.sound.play(Paths.sound('cancelMenu'));
 			if (!selecting) FlxG.switchState(new MainMenuState());
