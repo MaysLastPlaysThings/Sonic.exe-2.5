@@ -4286,7 +4286,7 @@ class PlayState extends MusicBeatState
 		}
 		botplayTxt.visible = cpuControlled;
 
-		if (FlxG.keys.justPressed.ENTER || TouchInput.BACK && startedCountdown && canPause)
+		if (FlxG.keys.justPressed.ENTER || TouchInput.BACK() && startedCountdown && canPause)
 		{
 			// B-B-BB-B-B-B-BUT MR. CRYBIT!!! THIS IS UNOPTIMIZED!!! shut up you're literally like 5 years old you stupid child why do you exist in this plane of existance cease to exist in t-90 seconds or i will persnally manually have to remove you from the mortal realm you wretched fool.
 			FlxTween.globalManager.forEach(function(tween:FlxTween)
