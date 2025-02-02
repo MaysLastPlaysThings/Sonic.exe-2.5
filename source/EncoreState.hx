@@ -126,17 +126,17 @@ class EncoreState extends MusicBeatState // REWRITE FREEPLAY!?!?!? HELL YEA!!!!!
 
 		if (cdman)
 		{
-			if (upP)
+			if (upP || TouchUtil.isSwipe('left'))
 			{
 				changeSelection(-1);
 			}
-			if (downP)
+			if (downP || TouchUtil.isSwipe('right'))
 			{
 				changeSelection(1);
 			}
 		}
 
-		if (controls.BACK)
+		if (controls.BACK || TouchUtil.BACK)
 		{
 			FlxG.switchState(new MainMenuState());
 		}
