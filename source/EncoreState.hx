@@ -15,7 +15,7 @@ import flixel.util.FlxColor;
 import flixel.tweens.FlxEase;
 import flixel.tweens.FlxTween;
 import lime.utils.Assets;
-
+import mobile.utils.TouchInput;
 
 #if windows
 import Discord.DiscordClient;
@@ -38,7 +38,7 @@ class EncoreState extends MusicBeatState // REWRITE FREEPLAY!?!?!? HELL YEA!!!!!
 	var cdman:Bool = true;
 
 	var fuck:Int = 0;
-
+  var char:FlxSprite;
 	var songtext:FlxText;
 	var prevsongtext:FlxText;
 
@@ -77,7 +77,7 @@ class EncoreState extends MusicBeatState // REWRITE FREEPLAY!?!?!? HELL YEA!!!!!
 			var box:FlxSprite = new FlxSprite(fuck * 780, 0).loadGraphic(Paths.image('FreeBox'));
 			boxgrp.add(box);
 
-			var char:FlxSprite = new FlxSprite(fuck * 780, 0).loadGraphic(Paths.image('fpstuff/' + songArray[fuck].toLowerCase()));
+		 char = new FlxSprite(fuck * 780, 0).loadGraphic(Paths.image('fpstuff/' + songArray[fuck].toLowerCase()));
 			boxgrp.add(char);
 
 			fuck += 1;
@@ -108,8 +108,7 @@ class EncoreState extends MusicBeatState // REWRITE FREEPLAY!?!?!? HELL YEA!!!!!
 		var upP = FlxG.keys.justPressed.LEFT || controls.UI_LEFT_P;
 		var downP = FlxG.keys.justPressed.RIGHT || controls.UI_RIGHT_P;
 		var accepted = controls.ACCEPT;
-		
-		
+
 		var gamepad:FlxGamepad = FlxG.gamepads.lastActive;
 
 		if (gamepad != null)
@@ -141,7 +140,7 @@ class EncoreState extends MusicBeatState // REWRITE FREEPLAY!?!?!? HELL YEA!!!!!
 			FlxG.switchState(new MainMenuState());
 		}
 
-		if (accepted && cdman && songArray[0] != 'lol')
+		if (accepted || TouchInput.justPressed(char) && cdman && songArray[0] != 'lol')
 		{
 			cdman = false;
 
@@ -173,10 +172,8 @@ class EncoreState extends MusicBeatState // REWRITE FREEPLAY!?!?!? HELL YEA!!!!!
 				LoadingState.loadAndSwitchState(new PlayState());
 			});
 		}
-		
 	}
 
-	
 	function changeSelection(change:Int = 0)
 	{
 		if (change == 1 && curSelected != songArray.length - 1) 
