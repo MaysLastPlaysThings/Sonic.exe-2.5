@@ -18,7 +18,7 @@ import lime.utils.Assets;
 import flixel.system.FlxSound;
 import flixel.addons.display.FlxBackdrop;
 import flixel.addons.effects.FlxSkewedSprite;
-
+import mobile.utils.TouchInput;
 
 #if windows
 import Discord.DiscordClient;
@@ -172,8 +172,8 @@ class FreeplayState extends MusicBeatState // REWRITE FREEPLAY!?!?!? HELL YEA!!!
 
 		super.update(elapsed);
 
-		var upP = controls.UI_UP_P || TouchUtil.isSwipe('up') || FlxG.keys.justPressed.W;
-		var downP = controls.UI_UP_P || TouchUtil.isSwipe('down') || FlxG.keys.justPressed.S;
+		var upP = controls.UI_UP_P || TouchInput.isSwipe('up') || FlxG.keys.justPressed.W;
+		var downP = controls.UI_UP_P || TouchInput.isSwipe('down') || FlxG.keys.justPressed.S;
 		var accepted = controls.ACCEPT;
 
 		var gamepad:FlxGamepad = FlxG.gamepads.lastActive;
@@ -202,7 +202,7 @@ class FreeplayState extends MusicBeatState // REWRITE FREEPLAY!?!?!? HELL YEA!!!
 			}
 		}
 
-		if (controls.BACK || TouchUtil.BACK)
+		if (controls.BACK || TouchInput.BACK)
 		{
 			FlxG.sound.play(Paths.sound('cancelMenu'));
 			if (!selecting) FlxG.switchState(new MainMenuState());
