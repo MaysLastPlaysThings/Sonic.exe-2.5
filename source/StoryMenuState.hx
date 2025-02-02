@@ -300,10 +300,10 @@ class StoryMenuState extends MusicBeatState
 				changediff(1);
 		}
 
-		if ((controls.UI_UP_P && oneclickpls) || (controls.UI_DOWN_P && oneclickpls))
+		if ((controls.UI_UP_P || TouchUtil.isSwipe('up') && oneclickpls) || (controls.UI_DOWN_P || TouchUtil.isSwipe('down') && oneclickpls))
 			changeSelec(); // i forgor how ifs work
 
-		if (controls.BACK && oneclickpls)
+		if (controls.BACK || TouchUtil.BACK && oneclickpls)
 		{
 			FlxG.sound.play(Paths.sound('cancelMenu'));
 			FlxG.switchState(new MainMenuState());
