@@ -25,6 +25,7 @@ import flixel.util.FlxTimer;
 import flixel.input.keyboard.FlxKey;
 import flixel.graphics.FlxGraphic;
 import Controls;
+import mobile.utils.TouchInput;
 
 using StringTools;
 
@@ -73,14 +74,14 @@ class OptionsState extends MusicBeatState
 	override function update(elapsed:Float) {
 		super.update(elapsed);
 
-		if (controls.UI_UP_P) {
+		if (controls.UI_UP_P || TouchInput.isSwipe('up')) {
 			changeSelection(-1);
 		}
-		if (controls.UI_DOWN_P) {
+		if (controls.UI_DOWN_P || TouchInput.isSwipe('down')) {
 			changeSelection(1);
 		}
 
-		if (controls.BACK) {
+		if (controls.BACK || TouchInput.BACK) {
 			FlxG.sound.play(Paths.sound('cancelMenu'));
 			MusicBeatState.switchState(new MainMenuState());
 		}
@@ -208,7 +209,7 @@ class ControlsSubstate extends MusicBeatSubstate {
 				changeAlt();
 			}
 
-			if (controls.BACK) {
+			if (controls.BACK || TouchInput.BACK) {
 				ClientPrefs.keyBinds = controlMap.copy();
 				ClientPrefs.reloadControls();
 				grpOptions.forEachAlive(function(spr:Alphabet) {
@@ -557,16 +558,16 @@ class PreferencesSubstate extends MusicBeatSubstate
 	var holdTime:Float = 0;
 	override function update(elapsed:Float)
 	{
-		if (controls.UI_UP_P)
+		if (controls.UI_UP_P || TouchInput.isSwipe('up'))
 		{
 			changeSelection(-1);
 		}
-		if (controls.UI_DOWN_P)
+		if (controls.UI_DOWN_P || TouchInput.isSwipe('down'))
 		{
 			changeSelection(1);
 		}
 
-		if (controls.BACK) {
+		if (controls.BACK || TouchInput.BACK) {
 			grpOptions.forEachAlive(function(spr:Alphabet) {
 				spr.alpha = 0;
 			});
@@ -583,7 +584,7 @@ class PreferencesSubstate extends MusicBeatSubstate
 				showCharacter.alpha = 0;
 			}
 			descText.alpha = 0;
-			close();
+				close();
 			FlxG.sound.play(Paths.sound('cancelMenu'));
 		}
 
