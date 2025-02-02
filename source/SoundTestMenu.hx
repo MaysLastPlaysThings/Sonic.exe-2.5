@@ -386,13 +386,15 @@ class SoundTestMenu extends MusicBeatState
 		
 	override public function update(elapsed:Float)
 		{
-			if (FlxG.keys.justPressed.RIGHT || FlxG.keys.justPressed.LEFT || FlxG.keys.justPressed.A || FlxG.keys.justPressed.D) if (woahmanstopspammin) funnymonke = !funnymonke;
+		  /*if (TouchInput.isSwipe('up'))
+		  FlxG.stage.window.textInputEnabled = true;*/
+			if (controls.UI_RIGHT_P || controls.UI_LEFT_P || FlxG.keys.justPressed.A || FlxG.keys.justPressed.D) if (woahmanstopspammin) funnymonke = !funnymonke;
 
-			if (FlxG.keys.justPressed.DOWN || FlxG.keys.justPressed.S)  changeNumber(1);
+			if (controls.UI_DOWN_P || FlxG.keys.justPressed.S)  changeNumber(1);
 
-			if (FlxG.keys.justPressed.UP || FlxG.keys.justPressed.W) changeNumber(-1);
+			if (controls.UI_UP_P || FlxG.keys.justPressed.W) changeNumber(-1);
 
-			if (FlxG.keys.justPressed.ENTER && woahmanstopspammin) doTheThing(pcmValue, daValue);
+			if (controls.ACCEPT && woahmanstopspammin) doTheThing(pcmValue, daValue);
 
 			if (coldsteelCode == 9)
 				{
@@ -411,9 +413,9 @@ class SoundTestMenu extends MusicBeatState
 					});
 				}
 
-			if (FlxG.keys.justPressed.ENTER && !woahmanstopspammin && incameo) LoadingState.loadAndSwitchState(new SoundTestMenu());
+			if (controls.ACCEPT && !woahmanstopspammin && incameo) LoadingState.loadAndSwitchState(new SoundTestMenu());
 
-			if (FlxG.keys.justPressed.ESCAPE && woahmanstopspammin && !incameo) LoadingState.loadAndSwitchState(new MainMenuState());
+			if (controls.BACK && woahmanstopspammin && !incameo) LoadingState.loadAndSwitchState(new MainMenuState());
 
 			if (funnymonke)
 			{
@@ -486,7 +488,5 @@ class SoundTestMenu extends MusicBeatState
 				//lol i copied this from titlestate lmfao
 	
 			super.update(elapsed);
-		}
-	
-
+  }
 }
