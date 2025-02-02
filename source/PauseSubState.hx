@@ -19,6 +19,7 @@ import flixel.FlxCamera;
 import flixel.addons.display.FlxBackdrop;
 import openfl.filters.ShaderFilter;
 import flixel.util.FlxTimer;
+import mobile.utils.TouchInput;
 
 class PauseSubState extends MusicBeatSubstate
 {
@@ -54,6 +55,7 @@ class PauseSubState extends MusicBeatSubstate
 	public var timeBar:FlxBar;
 	public var boyfriend:Boyfriend;
 	var songPercent:Float = 0;
+	var actualText:FlxSprite;
 
 	public static var transCamera:FlxCamera;
 
@@ -68,7 +70,6 @@ class PauseSubState extends MusicBeatSubstate
 		camThing = new FlxCamera();
 		camThing.bgColor.alpha = 0;
 		FlxG.cameras.add(camThing);
-
 
 		super();
 		menuItems = menuItemsOG;
@@ -196,7 +197,7 @@ class PauseSubState extends MusicBeatSubstate
 			songText.ID = i;
 			FlxTween.tween(songText, {x: songText.x - 480 * (i + 1)}, 0.2, {ease: FlxEase.quadOut});
 			grpMenuShit.add(songText);
-			var actualText:FlxSprite = new FlxSprite(songText.x + 25, songText.y + 25).loadGraphic(Paths.image(StringTools.replace("pauseStuff/" + menuItems[i], " ", "")));
+			actualText = new FlxSprite(songText.x + 25, songText.y + 25).loadGraphic(Paths.image(StringTools.replace("pauseStuff/" + menuItems[i], " ", "")));
 			actualText.ID = i;
 			actualText.x += (i + 1) * 480;
 			actualText.y = FlxG.height / 2 + 70 + 100 * i + 5;
@@ -227,7 +228,6 @@ class PauseSubState extends MusicBeatSubstate
 
 	override function update(elapsed:Float)
 	{
-
 		if (PlayState.isFixedAspectRatio) FlxG.fullscreen = false;
 
 		if(FlxG.keys.justPressed.P)
@@ -289,9 +289,9 @@ class PauseSubState extends MusicBeatSubstate
 
 		super.update(elapsed);
 
-		var upP = controls.UI_UP_P;
-		var downP = controls.UI_DOWN_P;
-		var accepted = controls.ACCEPT;
+		var upP = controls.UI_UP_P || TouchInput.isSwipe('up');
+		var downP = controls.UI_DOWN_P || TouchInput.isSwipe('down');
+		var accepted = controls.ACCEPT || TouchInput.justPressed(actualText);
 
 		if (coolDown)
 		{
