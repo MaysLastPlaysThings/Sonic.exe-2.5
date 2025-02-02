@@ -202,7 +202,7 @@ class MainMenuState extends MusicBeatState
 					changeItem(1);
 				}
 
-				if (FlxG.keys.justPressed.BACKSPACE || controls.BACK || TouchInput.BACK)
+				if (FlxG.keys.justPressed.BACKSPACE || controls.BACK || TouchInput.BACK())
 				{
 					selectedSomethin = true;
 					FlxG.sound.play(Paths.sound('cancelMenu'));
