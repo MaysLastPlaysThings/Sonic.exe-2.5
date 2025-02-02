@@ -81,12 +81,12 @@ class OptionsState extends MusicBeatState
 			changeSelection(1);
 		}
 
-		if (controls.BACK || TouchInput.BACK) {
+		if (controls.BACK || TouchInput.BACK()) {
 			FlxG.sound.play(Paths.sound('cancelMenu'));
 			MusicBeatState.switchState(new MainMenuState());
 		}
 
-		if (controls.ACCEPT) {
+		if (controls.ACCEPT || TouchInput.justPressed(grpOptions.members[curSelected])) {
 			for (item in grpOptions.members) {
 				item.alpha = 0;
 			}
@@ -209,7 +209,7 @@ class ControlsSubstate extends MusicBeatSubstate {
 				changeAlt();
 			}
 
-			if (controls.BACK || TouchInput.BACK) {
+			if (controls.BACK || TouchInput.BACK()) {
 				ClientPrefs.keyBinds = controlMap.copy();
 				ClientPrefs.reloadControls();
 				grpOptions.forEachAlive(function(spr:Alphabet) {
@@ -567,7 +567,7 @@ class PreferencesSubstate extends MusicBeatSubstate
 			changeSelection(1);
 		}
 
-		if (controls.BACK || TouchInput.BACK) {
+		if (controls.BACK || TouchInput.BACK()) {
 			grpOptions.forEachAlive(function(spr:Alphabet) {
 				spr.alpha = 0;
 			});
@@ -597,7 +597,7 @@ class PreferencesSubstate extends MusicBeatSubstate
 		}
 
 		if(usesCheckbox) {
-			if(controls.ACCEPT && nextAccept <= 0) {
+			if(controls.ACCEPT || TouchInput.justPressed(grpOptions.members[curSelected]) && nextAccept <= 0) {
 				switch(options[curSelected]) {
 					case 'FPS Counter':
 						ClientPrefs.showFPS = !ClientPrefs.showFPS;
