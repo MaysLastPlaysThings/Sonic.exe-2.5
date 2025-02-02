@@ -40,6 +40,7 @@ class FreeplayState extends MusicBeatState // REWRITE FREEPLAY!?!?!? HELL YEA!!!
 	var cdman:Bool = true;
 	var fuck:Int = 0;
 	var selecting:Bool = false;
+	var char:FlxSkewedSprite;
 	var charText:FlxText;
 	var scoreText:FlxText;
 
@@ -82,7 +83,7 @@ class FreeplayState extends MusicBeatState // REWRITE FREEPLAY!?!?!? HELL YEA!!!
 					if (Assets.exists('assets/images/fpstuff/' + charArray[i].toLowerCase() + '.png'))
 					{
 						FlxG.log.add(charArray[i] + ' found');
-						var char:FlxSkewedSprite = new FlxSkewedSprite(0, i * 415);
+						char = new FlxSkewedSprite(0, i * 415);
 						char.loadGraphic(Paths.image('fpstuff/' + charArray[i].toLowerCase()));
 						boxgrp.add(char);
 						char.ID = i;
@@ -171,8 +172,8 @@ class FreeplayState extends MusicBeatState // REWRITE FREEPLAY!?!?!? HELL YEA!!!
 
 		super.update(elapsed);
 
-		var upP = controls.UI_UP_P || FlxG.keys.justPressed.W;
-		var downP = controls.UI_UP_P || FlxG.keys.justPressed.S;
+		var upP = controls.UI_UP_P || TouchUtil.isSwipe('up') || FlxG.keys.justPressed.W;
+		var downP = controls.UI_UP_P || TouchUtil.isSwipe('down') || FlxG.keys.justPressed.S;
 		var accepted = controls.ACCEPT;
 
 		var gamepad:FlxGamepad = FlxG.gamepads.lastActive;
@@ -201,7 +202,7 @@ class FreeplayState extends MusicBeatState // REWRITE FREEPLAY!?!?!? HELL YEA!!!
 			}
 		}
 
-		if (controls.BACK)
+		if (controls.BACK || TouchUtil.BACK)
 		{
 			FlxG.sound.play(Paths.sound('cancelMenu'));
 			if (!selecting) FlxG.switchState(new MainMenuState());
@@ -219,7 +220,7 @@ class FreeplayState extends MusicBeatState // REWRITE FREEPLAY!?!?!? HELL YEA!!!
 		}
 
 
-		if (accepted && cdman && selecting)
+		if (accepted || TouchInput.justPressed(char) && cdman && selecting)
 		{		
 			if (charUnlocked.contains(charArray[curSelected]))
 			{
@@ -261,7 +262,7 @@ class FreeplayState extends MusicBeatState // REWRITE FREEPLAY!?!?!? HELL YEA!!!
 				});
 			}
 		}
-		if (accepted && cdman && !selecting)
+		if (accepted || TouchInput.justPressed(char) && cdman && !selecting)
 		{
 			FlxG.sound.play(Paths.sound('scrollMenu'), 0.4);
 			selecting = true;
