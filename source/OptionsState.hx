@@ -199,13 +199,13 @@ class ControlsSubstate extends MusicBeatSubstate {
 	var bindingTime:Float = 0;
 	override function update(elapsed:Float) {
 		if(!rebindingKey) {
-			if (controls.UI_UP_P) {
+			if (controls.UI_UP_P || TouchInput.isSwipe('up')) {
 				changeSelection(-1);
 			}
-			if (controls.UI_DOWN_P) {
+			if (controls.UI_DOWN_P || TouchInput.isSwipe('down')) {
 				changeSelection(1);
 			}
-			if (controls.UI_LEFT_P || controls.UI_RIGHT_P) {
+			if (controls.UI_LEFT_P || TouchInput.isSwipe('left') || controls.UI_RIGHT_P || TouchInput.isSwipe('right')) {
 				changeAlt();
 			}
 
@@ -664,9 +664,9 @@ class PreferencesSubstate extends MusicBeatSubstate
 				reloadValues();
 			}
 		} else {
-			if(controls.UI_LEFT || controls.UI_RIGHT) {
-				var add:Int = controls.UI_LEFT ? -1 : 1;
-				if(holdTime > 0.5 || controls.UI_LEFT_P || controls.UI_RIGHT_P)
+			if(controls.UI_LEFT || TouchInput.isSwipe('left') || controls.UI_RIGHT || TouchInput.isSwipe('right')) {
+				var add:Int = controls.UI_LEFT || TouchInput.isSwipe('left') ? -1 : 1;
+				if(holdTime > 0.5 || controls.UI_LEFT_P || TouchInput.isSwipe('left') || controls.UI_RIGHT_P || TouchInput.isSwipe('right'))
 				switch(options[curSelected]) {
 					case 'Framerate':
 						ClientPrefs.framerate += add;
