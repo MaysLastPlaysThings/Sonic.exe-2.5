@@ -98,7 +98,6 @@ class PauseSubState extends MusicBeatSubstate
 		timeBarBG.xAdd = -4;
 		timeBarBG.yAdd = -4;
 
-
 		timeBar = new FlxBar(timeBarBG.x + 4, timeBarBG.y + 4, LEFT_TO_RIGHT, Std.int(timeBarBG.width - 8), Std.int(timeBarBG.height - 8), PlayState.current,
 			'songPercent', 0, 1);
 		timeBar.scrollFactor.set();
@@ -322,11 +321,10 @@ class PauseSubState extends MusicBeatSubstate
 				}
 
 				FlxTween.cancelTweensOf(iconP1);
+
 				switch (daSelected)
 				{
-
 					case "Resume":
-
 						coolDown = false;
 						FlxG.sound.play(Paths.sound("unpause"));
 						grpMenuShit.forEach(function(item:FlxSprite)
@@ -404,15 +402,12 @@ class PauseSubState extends MusicBeatSubstate
 		if (curSelected >= menuItems.length)
 			curSelected = 0;
 
-
-
 		for (item in grpMenuShit.members)
 		{
 			FlxTween.cancelTweensOf(item);
 
 			item.x = FlxG.width - 400 - 80 * item.ID;
 			item.y = FlxG.height / 2 + 70 + 100 * item.ID;
-
 
 			if (item.ID == curSelected)
 			{
@@ -430,8 +425,8 @@ class PauseSubState extends MusicBeatSubstate
 			{
 				FlxTween.tween(item, {y: FlxG.height / 2 + 70 + 100 * item.ID}, 0.2, {ease: FlxEase.quadOut});
 			}
-			// item.setGraphicSize(Std.int(item.width * 0.8));
 		}
+
 		for (item in grpMenuShit2.members)
 		{
 			FlxTween.cancelTweensOf(item);
@@ -445,21 +440,4 @@ class PauseSubState extends MusicBeatSubstate
 			else FlxTween.tween(item, {y: FlxG.height / 2 + 70 + 100 * item.ID + 5}, 0.2, {ease: FlxEase.quadOut});
 		}
 	}
-
-
-	/*
-	function regenMenu():Void {
-		for (i in 0...grpMenuShit.members.length) {
-			this.grpMenuShit.remove(this.grpMenuShit.members[0], true);
-		}
-		for (i in 0...menuItems.length) {
-			var item = new Alphabet(0, 70 * i + 30, menuItems[i], true, false);
-			item.isMenuItem = true;
-			item.targetY = i;
-			grpMenuShit.add(item);
-		}
-		curSelected = 0;
-		changeSelection();
-	}
-	*/
 }
