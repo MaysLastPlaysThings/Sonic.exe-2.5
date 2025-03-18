@@ -3994,7 +3994,7 @@ class PlayState extends MusicBeatState
 			switch (char.curCharacter)
 			{
 				case "scorched":
-					FlxG.zoom = FlxMath.lerp(0.5, FlxG.camera.zoom, CoolUtil.boundTo(1 - (elapsed * 3.125), 0, 1));
+					FlxG.camera.zoom = FlxMath.lerp(0.5, FlxG.camera.zoom, CoolUtil.boundTo(1 - (elapsed * 3.125), 0, 1));
 					camFollow.x += 20;
 					camFollow.y += 70;
 				case "starved":
