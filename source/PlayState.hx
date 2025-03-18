@@ -2416,7 +2416,7 @@ class PlayState extends MusicBeatState
 					camHUD.alpha = 0;
 					startCountdown();
 
-				case 'too-slow' | 'you-cant-run' | 'triple-trouble' | 'endless' | 'cycles' | 'prey' | 'fight-or-flight'| 'round-a-bout':
+				case 'too-slow' | 'you-cant-run' | 'triple-trouble' | 'endless' | 'endless-encore' | 'cycles' | 'prey' | 'fight-or-flight'| 'round-a-bout':
 
 					if (daSong == 'too-slow' || daSong == 'you-cant-run' || daSong == 'cycles')
 						{
@@ -3468,7 +3468,7 @@ class PlayState extends MusicBeatState
 
 					if (songNotes[3] == null || songNotes[3] == '' || songNotes[3].length == 0){
 						switch(SONG.song.toLowerCase()){
-							case 'endless':
+							case 'endless' | 'endless-encore':
 								if(noteStep>=900){
 									songNotes[3] = 'Majin Note';
 								}
@@ -3714,7 +3714,7 @@ class PlayState extends MusicBeatState
 			if (SONG.player1 == "bf-fatal" && player == 1)
 				skin = 'week6';
 
-			if(SONG.song.toLowerCase()=='endless' && curStep>=900)skin='Majin_Notes';
+			if(SONG.song.toLowerCase()=='endless' && SONG.song.toLowerCase()=='endless-encore' && curStep>=900)skin='Majin_Notes';
 
 			var babyArrow:StrumNote = new StrumNote(0, strumLine.y, i, player, skin);
 
@@ -4439,6 +4439,8 @@ class PlayState extends MusicBeatState
 							startSong();
 						case 'endless':
 							startSong();
+						case 'endless-encore':
+							startSong();
 						default:
 							startSong();
 					}
@@ -4480,7 +4482,7 @@ class PlayState extends MusicBeatState
 					if (secondsRemaining.length < 2)
 						secondsRemaining = '0' + secondsRemaining; // Dunno how to make it display a zero first in Haxe lol
 
-					if(SONG.song.toLowerCase()=='endless' && curStep>=898){
+					if(SONG.song.toLowerCase()=='endless' && SONG.song.toLowerCase()=='endless-encore' && curStep>=898){
 						songPercent=0;
 						timeTxt.text = 'Infinity';
 					}else
@@ -7241,7 +7243,7 @@ class PlayState extends MusicBeatState
 			}
 		}
 
-		if(curSong == 'endless'){
+		if(curSong == 'endless' && curSong == 'endless-encore'){
 			switch(curStep){
 				case 1:
 					timeBar.createFilledBar(0xFF000000, 0xFF5f41a1);
