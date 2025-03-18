@@ -290,7 +290,7 @@ class PauseSubState extends MusicBeatSubstate
 
 		var upP = controls.UI_UP_P || TouchInput.isSwipe('up');
 		var downP = controls.UI_DOWN_P || TouchInput.isSwipe('down');
-		var accepted = controls.ACCEPT || TouchInput.justPressed(menuItems[curSelected]);
+		var accepted = controls.ACCEPT || TouchInput.justPressed(grpMenuShit2.members[curSelected]);
 
 		if (coolDown)
 		{
