@@ -2366,7 +2366,7 @@ class PlayState extends MusicBeatState
 		bottomBar.cameras = [camOther];
 
 		#if mobile
-		if (SONG.isRing && SONG.song.toLowerCase() == 'b4cksl4sh')
+		if (SONG.isRing)
 		{
 			addMobileControls(true, true);
 
@@ -2381,6 +2381,20 @@ class PlayState extends MusicBeatState
 		{
 			addMobileControls(false, true);
 		}
+
+      if (SONG.song.toLowerCase == 'b4cksl4sh') {
+			addMobileControls(true, true);
+
+			if (ClientPrefs.isvpad && MobileControls.mode != 'Hitbox' && MobileControls.mode != 'Keyboard')
+			{
+				addVirtualPad(NONE, DODGE);
+				addVirtualPadCamera(false);
+				virtualPad.visible = false;
+			}
+     } else	{
+			addMobileControls(false, true);
+		}
+
 		mobileControls.visible = false;
 		#end
 
