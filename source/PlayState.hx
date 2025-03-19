@@ -1704,9 +1704,10 @@ class PlayState extends MusicBeatState
 				add(fgTree2);
 			case 'DDDDD':
 				gfGroup.visible = false;
+				if (ClientPrefs.shaders) {
 				var vcr:VCRDistortionShader;
 				vcr = new VCRDistortionShader();
-
+				}
 				var daStatic:BGSprite = new BGSprite('daSTAT', 0, 0, 1.0, 1.0, ['staticFLASH'], true);
 				daStatic.cameras = [camHUD];
 				daStatic.setGraphicSize(FlxG.width, FlxG.height);
@@ -1714,11 +1715,13 @@ class PlayState extends MusicBeatState
 				daStatic.alpha = 0.05;
 				add(daStatic);
 
+				if (ClientPrefs.shaders) {
 				curShader = new ShaderFilter(vcr);
 
 				camGame.setFilters([curShader]);
 				camHUD.setFilters([curShader]);
 				camOther.setFilters([curShader]);
+		}
 			case 'hog':
 				gfGroup.visible = false;
 				add(hogRocks);
@@ -3787,6 +3790,7 @@ class PlayState extends MusicBeatState
 			colorSwap.brightness = -0.5;
 			colorSwap.saturation = -1;
 
+      if (ClientPrefs.shaders) {
 			if (curShader != null && health > 0)
 			{
 				camGame.setFilters([curShader, new ShaderFilter(colorSwap.shader)]);
@@ -3799,6 +3803,7 @@ class PlayState extends MusicBeatState
 				camHUD.setFilters([new ShaderFilter(colorSwap.shader)]);
 				camOther.setFilters([new ShaderFilter(colorSwap.shader)]);
 			}
+    }
 
 			if (FlxG.sound.music != null)
 			{
@@ -3839,6 +3844,7 @@ class PlayState extends MusicBeatState
 	{
 		if (paused)
 		{
+      if (ClientPrefs.shaders) {
 			if (curShader != null)
 			{
 				camGame.setFilters([curShader]);
@@ -3851,6 +3857,7 @@ class PlayState extends MusicBeatState
 				camHUD.setFilters([]);
 				camOther.setFilters([]);
 			}
+     }
 
 			if (FlxG.sound.music != null && !startingSong)
 			{
@@ -7078,6 +7085,7 @@ class PlayState extends MusicBeatState
 		var video:VideoSprite = new VideoSprite(0,0);
 		video.scrollFactor.set();
 		video.cameras = [camHUD];
+    if (ClientPrefs.shaders)
 		video.shader = new GreenScreenShader();
 		video.visible=false;
 		video.finishCallback = function(){
@@ -8163,12 +8171,14 @@ class PlayState extends MusicBeatState
 							case 408, 410, 412, 472, 474, 476, 536, 538, 540, 600, 602, 604, 682, 710, 745, 808, 825, 872, 888:
 								festSpinPlayer();
 							case 912:
+               if (ClientPrefs.shaders) {
 								if(ClientPrefs.flashing && weedVis!=null){
 									curShader = new ShaderFilter(weedVis);
 									camGame.setFilters([curShader]);
 									camHUD.setFilters([curShader]);
 									camOther.setFilters([curShader]);
 								}
+               }
 								weedSpinningTime = true;
 							case 1167:
 								weedSpinningTime = false;
