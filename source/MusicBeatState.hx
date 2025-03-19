@@ -15,6 +15,14 @@ import flixel.FlxState;
 import flixel.FlxBasic;
 import openfl.Lib;
 import flixel.system.scaleModes.RatioScaleMode;
+#if mobile
+import mobile.MobileControls;
+import mobile.flixel.FlxVirtualPad;
+import mobile.flixel.FlxHitbox;
+import flixel.FlxCamera;
+import flixel.input.actions.FlxActionInput;
+import flixel.util.FlxDestroyUtil;
+#end
 
 class MusicBeatState extends FlxUIState
 {
@@ -32,29 +40,176 @@ class MusicBeatState extends FlxUIState
 	inline function get_controls():Controls
 		return PlayerSettings.player1.controls;
 
-	override function create() {
+	#if mobile
+	var mobileControls:MobileControls;
+	var virtualPad:FlxVirtualPad;
+	var hitbox:FlxHitbox;
+	var trackedInputsHitbox:Array<FlxActionInput> = [];
+	var trackedInputsMobileControls:Array<FlxActionInput> = [];
+	var trackedInputsVirtualPad:Array<FlxActionInput> = [];
 
-		super.create();
+	var hitboxDiff:Dynamic;
 
+	public function addVirtualPad(DPad:FlxDPadMode, Action:FlxActionMode)
+	{
+		if (virtualPad != null)
+			removeVirtualPad();
+
+		virtualPad = new FlxVirtualPad(DPad, Action);
+		add(virtualPad);
+
+		controls.setVirtualPadUI(virtualPad, DPad, Action);
+		trackedInputsVirtualPad = controls.trackedInputsUI;
+		controls.trackedInputsUI = [];
 	}
 
-	#if (VIDEOS_ALLOWED && windows)
-	override public function onFocus():Void
+	public function removeVirtualPad()
 	{
-		FlxVideo.onFocus();
-		super.onFocus();
+		if (trackedInputsVirtualPad.length > 0)
+			controls.removeVirtualControlsInput(trackedInputsVirtualPad);
+
+		if (virtualPad != null)
+			remove(virtualPad);
 	}
 
-	override public function onFocusLost():Void
+	public function addMobileControls(usesDodge:Bool = false, DefaultDrawTarget:Bool = true)
 	{
-		FlxVideo.onFocusLost();
-		super.onFocusLost();
+		if (mobileControls != null)
+			removeMobileControls();
+
+		mobileControls = new MobileControls(usesDodge);
+
+		switch (MobileControls.mode)
+		{
+			case 'Pad-Right' | 'Pad-Left' | 'Pad-Custom':
+				controls.setVirtualPadNOTES(mobileControls.virtualPad, RIGHT_FULL, NONE);
+			case 'Pad-Duo':
+				controls.setVirtualPadNOTES(mobileControls.virtualPad, BOTH_FULL, NONE);
+			case 'Hitbox':
+				if (usesDodge)
+				{
+					controls.setHitBox(mobileControls.hitbox, SPACE);
+				}
+				else
+				{
+					controls.setHitBox(mobileControls.hitbox, DEFAULT);
+				}
+
+			case 'Keyboard': // do nothing
+		}
+
+		trackedInputsMobileControls = controls.trackedInputsNOTES;
+		controls.trackedInputsNOTES = [];
+
+		var camControls:FlxCamera = new FlxCamera();
+		FlxG.cameras.add(camControls, DefaultDrawTarget);
+		camControls.bgColor.alpha = 0;
+
+		mobileControls.cameras = [camControls];
+		mobileControls.visible = false;
+		add(mobileControls);
+	}
+
+	public function removeMobileControls()
+	{
+		if (trackedInputsMobileControls.length > 0)
+			controls.removeVirtualControlsInput(trackedInputsMobileControls);
+
+		if (mobileControls != null)
+			remove(mobileControls);
+	}
+
+	public function addVirtualPadCamera(DefaultDrawTarget:Bool = true)
+	{
+		if (virtualPad != null)
+		{
+			var camControls:FlxCamera = new FlxCamera();
+			FlxG.cameras.add(camControls, DefaultDrawTarget);
+			camControls.bgColor.alpha = 0;
+			virtualPad.cameras = [camControls];
+		}
+	}
+
+	public function addHitbox(?usesDodge = false):Void
+	{
+		if (hitbox != null)
+			removeHitbox();
+
+		if (usesDodge)
+		{
+			hitbox = new FlxHitbox(SPACE);
+			hitbox.visible = visible;
+			add(hitbox);
+			hitboxDiff = SPACE;
+		}
+		else
+		{
+			hitbox = new FlxHitbox(DEFAULT);
+			hitbox.visible = visible;
+			hitboxDiff = DEFAULT;
+		}
+
+		controls.setHitBox(hitbox, hitboxDiff);
+		trackedInputsHitbox = controls.trackedInputsNOTES;
+		controls.trackedInputsNOTES = [];
+	}
+
+	public function addHitboxCamera(DefaultDrawTarget:Bool = true):Void
+	{
+		if (hitbox != null)
+		{
+			var camControls:FlxCamera = new FlxCamera();
+			FlxG.cameras.add(camControls, DefaultDrawTarget);
+			camControls.bgColor.alpha = 0;
+			hitbox.cameras = [camControls];
+		}
+	}
+
+	public function removeHitbox():Void
+	{
+		if (trackedInputsHitbox.length > 0)
+			controls.removeVirtualControlsInput(trackedInputsHitbox);
+
+		if (hitbox != null)
+			remove(hitbox);
 	}
 	#end
 
+	override function destroy()
+	{
+		#if mobile
+		if (trackedInputsHitbox.length > 0)
+			controls.removeVirtualControlsInput(trackedInputsHitbox);
+
+		if (trackedInputsMobileControls.length > 0)
+			controls.removeVirtualControlsInput(trackedInputsMobileControls);
+
+		if (trackedInputsVirtualPad.length > 0)
+			controls.removeVirtualControlsInput(trackedInputsVirtualPad);
+		#end
+
+		super.destroy();
+
+		#if mobile
+		if (virtualPad != null)
+			virtualPad = FlxDestroyUtil.destroy(virtualPad);
+
+		if (mobileControls != null)
+			mobileControls = FlxDestroyUtil.destroy(mobileControls);
+
+		if (hitbox != null)
+			hitbox = FlxDestroyUtil.destroy(hitbox);
+		#end
+	}
+
+	override function create()
+	{
+		super.create();
+	}
+
 	override function update(elapsed:Float)
 	{
-		//everyStep();
+		// everyStep();
 		var oldStep:Int = curStep;
 
 		updateCurStep();
@@ -69,7 +224,7 @@ class MusicBeatState extends FlxUIState
 	private function updateBeat():Void
 	{
 		curBeat = Math.floor(curStep / 4);
-		curDecBeat = curDecStep/4;
+		curDecBeat = curDecStep / 4;
 	}
 
 	private function updateCurStep():Void
@@ -90,15 +245,18 @@ class MusicBeatState extends FlxUIState
 		curStep = lastChange.stepTime + Math.floor(shit);
 	}
 
-	public static function switchState(nextState:FlxState) {
+	public static function switchState(nextState:FlxState)
+	{
 		FlxG.switchState(nextState); // just because im too lazy to goto every instance of switchState and change it to a FlxG call
 	}
 
-	public static function resetState() {
+	public static function resetState()
+	{
 		FlxG.resetState();
 	}
 
-	public static function getState():MusicBeatState {
+	public static function getState():MusicBeatState
+	{
 		var curState:Dynamic = FlxG.state;
 		var leState:MusicBeatState = curState;
 		return leState;
@@ -112,6 +270,6 @@ class MusicBeatState extends FlxUIState
 
 	public function beatHit():Void
 	{
-		//do literally nothing dumbass
+		// do literally nothing dumbass
 	}
 }
