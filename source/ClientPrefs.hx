@@ -28,6 +28,10 @@ class ClientPrefs {
 	public static var arrowHSV:Array<Array<Int>> = [[0, 0, 0], [0, 0, 0], [0, 0, 0], [0, 0, 0]];
 	public static var imagesPersist:Bool = false;
 	public static var ghostTapping:Bool = true;
+	public static var controllerMode:Bool = true;
+	public static var dodgepos:String = 'middle';
+	public static var isvpad:Bool = false;
+	public static var shaders:Bool = true;
 	public static var soundTestUnlocked:Bool = false;
 	public static var hideTime:Bool = false;
 	public static var gore:Bool = true;
@@ -42,6 +46,7 @@ class ClientPrefs {
 		keyBinds.set('note_down', [S, DOWN]);
 		keyBinds.set('note_up', [W, UP]);
 		keyBinds.set('note_right', [D, RIGHT]);
+		keyBinds.set('note_space', [SPACE, NONE]);
 
 		keyBinds.set('ui_left', [A, LEFT]);
 		keyBinds.set('ui_down', [S, DOWN]);
@@ -70,6 +75,10 @@ class ClientPrefs {
 		FlxG.save.data.framerate = framerate;
 
 		FlxG.save.data.gore = gore;
+		FlxG.save.data.controllerMode = controllerMode;
+		FlxG.save.data.dodgepos = dodgepos;
+		FlxG.save.data.isvpad = isvpad;
+		FlxG.save.data.shaders = shaders;
 		FlxG.save.data.schmovin = schmovin;
 		//FlxG.save.data.cursing = cursing;
 		//FlxG.save.data.violence = violence;
@@ -135,6 +144,21 @@ class ClientPrefs {
 		}
 		if(FlxG.save.data.gore != null) {
 			gore = FlxG.save.data.gore;
+		}
+		if (FlxG.save.data.controllerMode != null)
+		{
+			controllerMode = FlxG.save.data.controllerMode;
+		}
+		if (FlxG.save.data.dodgepos != null)
+		{
+			dodgepos = FlxG.save.data.dodgepos;
+		}
+		if (FlxG.save.data.isvpad != null)
+		{
+			isvpad = FlxG.save.data.isvpad;
+		}
+		if (FlxG.save.data.shaders != null) {
+  		shaders = FlxG.save.data.shaders;
 		}
 		if(FlxG.save.data.schmovin!=null){
 			schmovin = FlxG.save.data.schmovin;
