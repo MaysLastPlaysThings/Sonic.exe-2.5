@@ -58,7 +58,7 @@ class SoundTestMenu extends MusicBeatState
 			cam.bgColor.alpha = 0;
 			FlxCamera.defaultCameras = [cam];
 
-      #if windows
+            #if windows
 			DiscordClient.changePresence('In the Sound Test Menu', null);
 			#end
 
@@ -92,17 +92,12 @@ class SoundTestMenu extends MusicBeatState
 			soundtesttext.setFormat("Sonic CD Menu Font Regular", 25, FlxColor.fromRGB(0, 163, 255));
 			soundtesttext.setBorderStyle(SHADOW, FlxColor.BLACK, 4, 1);
 			add(soundtesttext);
-			
-
 
 			pcmNO.setFormat("Sonic CD Menu Font Regular", 23, FlxColor.fromRGB(174, 179, 251));
 			pcmNO.setBorderStyle(SHADOW, FlxColor.fromRGB(106, 110, 159), 4, 1);
 
 			daNO.setFormat("Sonic CD Menu Font Regular", 23, FlxColor.fromRGB(174, 179, 251));
 			daNO.setBorderStyle(SHADOW, FlxColor.fromRGB(106, 110, 159), 4, 1);
-
-
-
 			
 			pcmNO.y -= 70;
 			pcmNO.x += 100;
@@ -113,13 +108,11 @@ class SoundTestMenu extends MusicBeatState
 
 			add(daNO);
 
-			
 			pcmNO_NUMBER.y -= 70;
 			pcmNO_NUMBER.x += 270;
 			pcmNO_NUMBER.setFormat("Sonic CD Menu Font Regular", 23, FlxColor.fromRGB(174, 179, 251));
 			pcmNO_NUMBER.setBorderStyle(SHADOW, FlxColor.fromRGB(106, 110, 159), 4, 1);
 			add(pcmNO_NUMBER);
-
 			
 			daNO_NUMBER.y -= 70;
 			daNO_NUMBER.x += daNO.x - 70;
@@ -135,11 +128,12 @@ class SoundTestMenu extends MusicBeatState
 
 			cameoImg.visible = false;
 			add(cameoImg);
-
-
-
 			add(whiteshit);
 
+            #if mobile
+			addVirtualPad(LEFT_FULL, A_B);
+			addVirtualPadCamera(false);
+			#end
 			
         }
 
@@ -401,7 +395,7 @@ class SoundTestMenu extends MusicBeatState
 					PlayStateChangeables.nocheese = false;
 					PlayState.SONG = Song.loadFromJson('personel-hard', 'personel');
 					PlayState.isStoryMode = false;
-		    	PlayState.isEncore = false;
+		    	    PlayState.isEncore = false;
 					PlayState.storyDifficulty = 2;
 					PlayState.storyWeek = 1;
 					
