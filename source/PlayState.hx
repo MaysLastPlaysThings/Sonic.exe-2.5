@@ -70,8 +70,11 @@ import flixel.group.FlxSpriteGroup.FlxTypedSpriteGroup;
 import flixel.tweens.FlxTween.FlxTweenManager;
 import flixel.system.scaleModes.StageSizeScaleMode;
 import flixel.system.scaleModes.BaseScaleMode;
+
 import hxcodec.VideoHandler;
 import hxcodec.VideoSprite;
+
+import mobile.MobileControls;
 import mobile.utils.TouchInput;
 
 using StringTools;
@@ -1643,8 +1646,12 @@ class PlayState extends MusicBeatState
 		// use this for 4:3 aspect ratio shit lmao
 		switch (SONG.song.toLowerCase())
 		{
-			case 'fatality' | "milk":
+			case 'fatality' | "milk" | 'b4cksl4sh':
+			  #if desktop
 				isFixedAspectRatio = true;
+				#else
+				isFixedAspectRatio = false;
+				#end
 			default:
 				isFixedAspectRatio = false;
 		}
@@ -1743,7 +1750,7 @@ class PlayState extends MusicBeatState
 
 		if (curStage == 'needle')
 		{
-			dad2 = new Character(0, 0, 'sarah');
+			dad2 = new Character(0, 0, 'Sarah');
 			startCharacterPos(dad2, true);
 			dad2Group.add(dad2);
 		}
@@ -2355,6 +2362,25 @@ class PlayState extends MusicBeatState
 		topBar.cameras = [camOther];
 		bottomBar.cameras = [camOther];
 
+		#if mobile
+		if (SONG.isRing)
+		{
+			addMobileControls(true, true);
+
+			if (ClientPrefs.isvpad && MobileControls.mode != 'Hitbox' && MobileControls.mode != 'Keyboard')
+			{
+				addVirtualPad(NONE, DODGE);
+				addVirtualPadCamera(false);
+				virtualPad.visible = false;
+			}
+		}
+		else
+		{
+			addMobileControls(false, true);
+		}
+		mobileControls.visible = false;
+		#end
+
 		var centerP = new FlxSprite(0, 0);
 		centerP.screenCenter(XY);
 
@@ -2732,14 +2758,17 @@ class PlayState extends MusicBeatState
 			keysArray = [
 				ClientPrefs.copyKey(ClientPrefs.keyBinds.get('note_left')),
 				ClientPrefs.copyKey(ClientPrefs.keyBinds.get('note_down')),
-				ClientPrefs.copyKey([FlxKey.SPACE]),
+				ClientPrefs.copyKey(ClientPrefs.keyBinds.get('note_space')),
 				ClientPrefs.copyKey(ClientPrefs.keyBinds.get('note_up')),
 				ClientPrefs.copyKey(ClientPrefs.keyBinds.get('note_right'))
 			];
 		}
 
-		FlxG.stage.addEventListener(KeyboardEvent.KEY_DOWN, onKeyPress);
-		FlxG.stage.addEventListener(KeyboardEvent.KEY_UP, onKeyRelease);
+		if (!ClientPrefs.controllerMode) // what
+		{
+			FlxG.stage.addEventListener(KeyboardEvent.KEY_DOWN, onKeyPress);
+			FlxG.stage.addEventListener(KeyboardEvent.KEY_UP, onKeyRelease);
+		}
 
 		#if desktop
 		// Updating Discord Rich Presence.
@@ -2766,10 +2795,6 @@ class PlayState extends MusicBeatState
 		}else{
 			FadeTransitionSubstate.nextCamera = camOther;
 		}
-
-
-
-
 
 		super.create();
 	}
@@ -2824,7 +2849,7 @@ class PlayState extends MusicBeatState
 
 		if ((key >= 0)
 			&& !cpuControlled
-			&& (FlxG.keys.checkStatus(eventKey, JUST_PRESSED))
+			&& (FlxG.keys.checkStatus(eventKey, JUST_PRESSED) || ClientPrefs.controllerMode)
 			&& (FlxG.keys.enabled && !paused && (FlxG.state.active || FlxG.state.persistentUpdate)))
 		{
 			if (generatedMusic)
@@ -3032,6 +3057,14 @@ class PlayState extends MusicBeatState
 			callOnLuas('onStartCountdown', []);
 			return;
 		}
+
+		#if mobile
+		mobileControls.visible = true;
+		if (ClientPrefs.isvpad && SONG.isRing && MobileControls.mode != 'Hitbox' && MobileControls.mode != 'Keyboard')
+		{
+			virtualPad.visible = true;
+		}
+		#end
 
 		inCutscene = false;
 		var ret:Dynamic = callOnLuas('onStartCountdown', []);
@@ -4916,9 +4949,50 @@ class PlayState extends MusicBeatState
 			var right = controls.NOTE_RIGHT;
 			var down = controls.NOTE_DOWN;
 			var left = controls.NOTE_LEFT;
+			var space = controls.NOTE_SPACE;
+			
 			var holdControls:Array<Bool> = [left, down, up, right];
 			if (SONG.isRing)
-				holdControls = [left, down, FlxG.keys.pressed.SPACE, up, right];
+				holdControls = [left, down, space, up, right];
+
+			if (ClientPrefs.controllerMode)
+			{
+				if (SONG.isRing)
+				{
+					var controlArray:Array<Bool> = [
+						controls.NOTE_LEFT_P,
+						controls.NOTE_DOWN_P,
+						controls.NOTE_SPACE_P,
+						controls.NOTE_UP_P,
+						controls.NOTE_RIGHT_P
+					];
+					if (controlArray.contains(true))
+					{
+						for (i in 0...controlArray.length)
+						{
+							if (controlArray[i])
+								onKeyPress(new KeyboardEvent(KeyboardEvent.KEY_DOWN, true, true, -1, keysArray[i][0]));
+						}
+					}
+				}
+				else
+				{
+					var controlArray:Array<Bool> = [
+						controls.NOTE_LEFT_P,
+						controls.NOTE_DOWN_P,
+						controls.NOTE_UP_P,
+						controls.NOTE_RIGHT_P
+					];
+					if (controlArray.contains(true))
+					{
+						for (i in 0...controlArray.length)
+						{
+							if (controlArray[i])
+								onKeyPress(new KeyboardEvent(KeyboardEvent.KEY_DOWN, true, true, -1, keysArray[i][0]));
+						}
+					}
+				}
+			}
 
 			if (holdControls.contains(true) && /*!boyfriend.stunned && */ generatedMusic)
 			{
@@ -4942,6 +5016,45 @@ class PlayState extends MusicBeatState
 			}
 			cameraDisplacement(boyfriend, true);
 			cameraDisplacement(dad, false);
+		}
+
+		if (ClientPrefs.controllerMode)
+		{
+			if (SONG.isRing)
+			{
+				var controlArray:Array<Bool> = [
+					controls.NOTE_LEFT_R,
+					controls.NOTE_DOWN_R,
+					controls.NOTE_SPACE_R,
+					controls.NOTE_UP_R,
+					controls.NOTE_RIGHT_R
+				];
+				if (controlArray.contains(true))
+				{
+					for (i in 0...controlArray.length)
+					{
+						if (controlArray[i])
+							onKeyRelease(new KeyboardEvent(KeyboardEvent.KEY_UP, true, true, -1, keysArray[i][0]));
+					}
+				}
+			}
+			else
+			{
+				var controlArray:Array<Bool> = [
+					controls.NOTE_LEFT_R,
+					controls.NOTE_DOWN_R,
+					controls.NOTE_UP_R,
+					controls.NOTE_RIGHT_R
+				];
+				if (controlArray.contains(true))
+				{
+					for (i in 0...controlArray.length)
+					{
+						if (controlArray[i])
+							onKeyRelease(new KeyboardEvent(KeyboardEvent.KEY_UP, true, true, -1, keysArray[i][0]));
+					}
+				}
+			}
 		}
 
 		checkEventNote();
@@ -5987,6 +6100,15 @@ class PlayState extends MusicBeatState
 			FlxG.mouse.visible = false;
 			FlxG.mouse.unload();
 		}
+
+		#if mobile
+		mobileControls.visible = false;
+		if (ClientPrefs.isvpad && SONG.isRing && MobileControls.mode != 'Hitbox' && MobileControls.mode != 'Keyboard')
+		{
+			virtualPad.visible = true;
+		}
+		#end
+
 		timeBarBG.visible = false;
 		timeBar.visible = false;
 		timeTxt.visible = false;
@@ -7047,9 +7169,11 @@ class PlayState extends MusicBeatState
 
 	override function destroy()
 	{
-		FlxG.stage.removeEventListener(KeyboardEvent.KEY_DOWN, onKeyPress);
-		FlxG.stage.removeEventListener(KeyboardEvent.KEY_UP, onKeyRelease);
-		// holdRenderer.Destroy();
+		if (!ClientPrefs.mariomaster)
+		{
+			FlxG.stage.removeEventListener(KeyboardEvent.KEY_DOWN, onKeyPress);
+			FlxG.stage.removeEventListener(KeyboardEvent.KEY_UP, onKeyRelease);
+		}
 
 		preventLuaRemove = true;
 		for (i in 0...luaArray.length)
@@ -7258,13 +7382,12 @@ class PlayState extends MusicBeatState
 					FlxTween.tween(camHUD, {alpha: 1}, 0.5);
 			}
 		}
-		if (curStage == 'needle' && SONG.song.toLowerCase() == 'round-a-bout')
+		if (curStage == 'needle')
 		{
 			switch (curStep)
 			{
 				case 765:
 					FlxTween.tween(dad2, {alpha: 1}, 0.3, {ease: FlxEase.quadInOut});
-				// funnyLargeTween();
 
 				case 770:
 					var oki:Float = -0.1;
