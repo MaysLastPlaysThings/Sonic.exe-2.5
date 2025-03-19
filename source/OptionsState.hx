@@ -32,7 +32,7 @@ using StringTools;
 // TO DO: Redo the menu creation system for not being as dumb
 class OptionsState extends MusicBeatState
 {
-	var options:Array<String> = ['Controls', 'Preferences'];
+	var options:Array<String> = ['Controls', 'Mobile Controls', 'Preferences'];
 	private var grpOptions:FlxTypedGroup<Alphabet>;
 	private static var curSelected:Int = 0;
 	public static var menuBG:FlxSprite;
@@ -95,7 +95,8 @@ class OptionsState extends MusicBeatState
 
 				case 'Controls':
 					openSubState(new ControlsSubstate());
-
+				case 'Mobile Controls':
+					openSubState(new mobile.MobileControlsSubState());
 				case 'Preferences':
 					openSubState(new PreferencesSubstate());
 			}
@@ -394,7 +395,6 @@ class ControlsSubstate extends MusicBeatSubstate {
 			}
 		}
 
-
 		var bullShit:Int = 0;
 		for (i in 0...grpInputs.length) {
 			grpInputs[i].alpha = 0.6;
@@ -430,8 +430,6 @@ class ControlsSubstate extends MusicBeatSubstate {
 	}
 }
 
-
-
 class PreferencesSubstate extends MusicBeatSubstate
 {
 	private static var curSelected:Int = 0;
@@ -450,6 +448,7 @@ class PreferencesSubstate extends MusicBeatSubstate
 		'GRAPHICS',
 		'Low Quality',
 		'Anti-Aliasing',
+		'Shaders',
 		'Persistent Cached Data',
 		'Gore',
 		'Improved Hold Renderer',
@@ -621,6 +620,9 @@ class PreferencesSubstate extends MusicBeatSubstate
 						}
 						OptionsState.menuBG.antialiasing = ClientPrefs.globalAntialiasing;
 
+					case 'Shaders':
+						ClientPrefs.shaders = !ClientPrefs.shaders;
+
 					case 'Note Splashes':
 						ClientPrefs.noteSplashes = !ClientPrefs.noteSplashes;
 
@@ -730,6 +732,8 @@ class PreferencesSubstate extends MusicBeatSubstate
 
 		var daText:String = '';
 		switch(options[curSelected]) {
+			case 'Shaders':
+				daText = "If unchecked, the shaders will be disabled";
 			case 'Framerate':
 				daText = "Pretty self explanatory, isn't it?\nDefault value is 60.";
 			case 'Note Delay':
@@ -816,6 +820,8 @@ class PreferencesSubstate extends MusicBeatSubstate
 			if(checkbox != null) {
 				var daValue:Bool = false;
 				switch(options[checkboxNumber[i]]) {
+					case 'Shaders':
+						daValue = ClientPrefs.shaders;
 					case 'FPS Counter':
 						daValue = ClientPrefs.showFPS;
 					case 'Low Quality':
