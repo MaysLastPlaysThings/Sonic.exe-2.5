@@ -7169,7 +7169,7 @@ class PlayState extends MusicBeatState
 
 	override function destroy()
 	{
-		if (!ClientPrefs.mariomaster)
+		if (!ClientPrefs.controllerMode)
 		{
 			FlxG.stage.removeEventListener(KeyboardEvent.KEY_DOWN, onKeyPress);
 			FlxG.stage.removeEventListener(KeyboardEvent.KEY_UP, onKeyRelease);
