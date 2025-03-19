@@ -190,9 +190,9 @@ class BaseOptionsMenu extends MusicBeatSubstate
 			}
 			else
 			{
-				if (controls.UI_LEFT || controls.UI_RIGHT || TouchInput.isSwipe('left') || TouchInput.isSwipe('up'))
+				if (controls.UI_LEFT || controls.UI_RIGHT || TouchInput.isSwipe('left') || TouchInput.isSwipe('right'))
 				{
-					var pressed = (controls.UI_LEFT_P || controls.UI_RIGHT_P || TouchInput.isSwipe('left') || TouchInput.isSwipe('up'));
+					var pressed = (controls.UI_LEFT_P || controls.UI_RIGHT_P || TouchInput.isSwipe('left') || TouchInput.isSwipe('right'));
 					if (holdTime > 0.5 || pressed)
 					{
 						if (pressed)
@@ -200,7 +200,7 @@ class BaseOptionsMenu extends MusicBeatSubstate
 							var add:Dynamic = null;
 							if (curOption.type != 'string')
 							{
-								add = controls.UI_LEFT ? -curOption.changeValue : curOption.changeValue;
+								add = controls.UI_LEFT || TouchInput.isSwipe('left') ? -curOption.changeValue : curOption.changeValue;
 							}
 
 							switch (curOption.type)
@@ -249,7 +249,7 @@ class BaseOptionsMenu extends MusicBeatSubstate
 						}
 						else if (curOption.type != 'string')
 						{
-							holdValue += curOption.scrollSpeed * elapsed * (controls.UI_LEFT ? -1 : 1);
+							holdValue += curOption.scrollSpeed * elapsed * (controls.UI_LEFT || TouchInput.isSwipe('left') ? -1 : 1);
 							if (holdValue < curOption.minValue)
 								holdValue = curOption.minValue;
 							else if (holdValue > curOption.maxValue)
@@ -273,7 +273,7 @@ class BaseOptionsMenu extends MusicBeatSubstate
 						holdTime += elapsed;
 					}
 				}
-				else if (controls.UI_LEFT_R || controls.UI_RIGHT_R || TouchInput.isSwipe('left') || TouchInput.isSwipe('up'))
+				else if (controls.UI_LEFT_R || controls.UI_RIGHT_R || TouchInput.isSwipe('left') || TouchInput.isSwipe('right'))
 				{
 					clearHold();
 				}
