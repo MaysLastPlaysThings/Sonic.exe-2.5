@@ -2363,7 +2363,7 @@ class PlayState extends MusicBeatState
 		bottomBar.cameras = [camOther];
 
 		#if mobile
-		if (SONG.isRing)
+		if (SONG.isRing && SONG.song.toLowerCase = 'b4cksl4sh')
 		{
 			addMobileControls(true, true);
 
