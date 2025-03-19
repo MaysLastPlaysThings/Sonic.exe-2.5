@@ -37,7 +37,7 @@ class HitboxSettingsSubState extends BaseOptionsMenu
 		title = 'Hitbox Dodge Menu';
 		rpcTitle = 'Hitbox Dodge Menu'; // hola amigos
 
-		var option:Option = new Option('Dodge Style:', "Choose your Dodge Style hehe --mariomaster", 'dodgepos', 'string', 'middle', ['middle', 'up', 'down']);
+		var option:Option = new Option('Dodge Style:', "Choose your Dodge Style", 'dodgepos', 'string', 'middle', ['middle', 'up', 'down']);
 		addOption(option);
 
 		super();
