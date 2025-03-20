@@ -1800,7 +1800,6 @@ class PlayState extends MusicBeatState
 			case 'needle':
 				add(needleFg);
 				dad2.alpha = 0.0001;
-
 				dad.x -= 120;
 				dad.y += 265;
 				boyfriend.x += 275;
@@ -7400,6 +7399,7 @@ class PlayState extends MusicBeatState
 			{
 				case 765:
 					FlxTween.tween(dad2, {alpha: 1}, 0.3, {ease: FlxEase.quadInOut});
+				// funnyLargeTween();
 
 				case 770:
 					var oki:Float = -0.1;
@@ -7414,7 +7414,6 @@ class PlayState extends MusicBeatState
 							oki = -0.01;
 						}
 						dad2.alpha += oki;
-
 						ok.reset();
 					});
 			}
