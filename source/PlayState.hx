@@ -2363,7 +2363,7 @@ class PlayState extends MusicBeatState
 		bottomBar.cameras = [camOther];
 
 		#if mobile
-		if (SONG.isRing)
+		if (SONG.song.toLowerCase == 'triple-trouble')
 		{
 		  //addMobileControls(true, true);
 		  addHitbox(true);
@@ -2382,8 +2382,7 @@ class PlayState extends MusicBeatState
 		}
 
       if (SONG.song.toLowerCase() == 'b4cksl4sh') {
-			//addMobileControls(true, true);
-			addHitbox(true);
+			 addMobileControls(true, true);
 
 			if (ClientPrefs.isvpad && MobileControls.mode != 'Hitbox' && MobileControls.mode != 'Keyboard')
 			{
@@ -2392,8 +2391,7 @@ class PlayState extends MusicBeatState
 				virtualPad.visible = false;
 			}
      } else	{
-			//addMobileControls(false, true);
-			addHitbox(false);
+			addMobileControls(false, true);
 		}
 
 		mobileControls.visible = false;
@@ -4092,7 +4090,7 @@ class PlayState extends MusicBeatState
 		managePopups();
 		modManager.update(elapsed);
 
-		if (canDodge && FlxG.keys.justPressed.SPACE && controls.NOTE_SPACE)
+		if (canDodge && FlxG.keys.justPressed.SPACE || canDodge && controls.NOTE_SPACE)
 		{
 			dodging = true;
 			boyfriend.playAnim('dodge', true);
@@ -4960,7 +4958,7 @@ class PlayState extends MusicBeatState
 			var right = controls.NOTE_RIGHT;
 			var down = controls.NOTE_DOWN;
 			var left = controls.NOTE_LEFT;
-			var  = controls.NOTE_SPACE;
+			var space = controls.NOTE_SPACE;
 			
 			var holdControls:Array<Bool> = [left, down, up, right];
 			if (SONG.isRing)
