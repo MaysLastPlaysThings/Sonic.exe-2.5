@@ -2769,7 +2769,7 @@ class PlayState extends MusicBeatState
 			keysArray = [
 				ClientPrefs.copyKey(ClientPrefs.keyBinds.get('note_left')),
 				ClientPrefs.copyKey(ClientPrefs.keyBinds.get('note_down')),
-				ClientPrefs.copyKey(ClientPrefs.keyBinds.get('note_')),
+				ClientPrefs.copyKey(ClientPrefs.keyBinds.get('note_space')),
 				ClientPrefs.copyKey(ClientPrefs.keyBinds.get('note_up')),
 				ClientPrefs.copyKey(ClientPrefs.keyBinds.get('note_right'))
 			];
