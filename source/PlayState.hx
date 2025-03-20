@@ -2129,8 +2129,8 @@ class PlayState extends MusicBeatState
 				add(warning);*/
 
 				dodgething = new FlxSprite(0, 600);
-				dodgething.frames = Paths.getSparrowAtlas('spacebar_icon', 'exe');
-				dodgething.animation.addByPrefix('a', 'spacebar', 24, false, true);
+				dodgething.frames = Paths.getSparrowAtlas('bar_icon', 'exe');
+				dodgething.animation.addByPrefix('a', 'bar', 24, false, true);
 				//dodgething.flipX = true;
 				dodgething.scale.x = .5;
 				dodgething.scale.y = .5;
@@ -2365,7 +2365,8 @@ class PlayState extends MusicBeatState
 		#if mobile
 		if (SONG.isRing)
 		{
-			addMobileControls(true, true);
+		  //addMobileControls(true, true);
+		  addHitbox(true);
 
 			if (ClientPrefs.isvpad && MobileControls.mode != 'Hitbox' && MobileControls.mode != 'Keyboard')
 			{
@@ -2376,11 +2377,13 @@ class PlayState extends MusicBeatState
 		}
 		else
 		{
-			addMobileControls(false, true);
+			//addMobileControls(false, true);
+			addHitbox(false);
 		}
 
       if (SONG.song.toLowerCase() == 'b4cksl4sh') {
-			addMobileControls(true, true);
+			//addMobileControls(true, true);
+			addHitbox(true);
 
 			if (ClientPrefs.isvpad && MobileControls.mode != 'Hitbox' && MobileControls.mode != 'Keyboard')
 			{
@@ -2389,7 +2392,8 @@ class PlayState extends MusicBeatState
 				virtualPad.visible = false;
 			}
      } else	{
-			addMobileControls(false, true);
+			//addMobileControls(false, true);
+			addHitbox(false);
 		}
 
 		mobileControls.visible = false;
@@ -2772,7 +2776,7 @@ class PlayState extends MusicBeatState
 			keysArray = [
 				ClientPrefs.copyKey(ClientPrefs.keyBinds.get('note_left')),
 				ClientPrefs.copyKey(ClientPrefs.keyBinds.get('note_down')),
-				ClientPrefs.copyKey(ClientPrefs.keyBinds.get('note_space')),
+				ClientPrefs.copyKey(ClientPrefs.keyBinds.get('note_')),
 				ClientPrefs.copyKey(ClientPrefs.keyBinds.get('note_up')),
 				ClientPrefs.copyKey(ClientPrefs.keyBinds.get('note_right'))
 			];
@@ -4095,7 +4099,7 @@ class PlayState extends MusicBeatState
 		managePopups();
 		modManager.update(elapsed);
 
-		if (canDodge && FlxG.keys.justPressed.SPACE && controls.NOTE_SPACE)
+		if (canDodge && FlxG.keys.justPressed. && controls.NOTE_)
 		{
 			dodging = true;
 			boyfriend.playAnim('dodge', true);
@@ -4963,11 +4967,11 @@ class PlayState extends MusicBeatState
 			var right = controls.NOTE_RIGHT;
 			var down = controls.NOTE_DOWN;
 			var left = controls.NOTE_LEFT;
-			var space = controls.NOTE_SPACE;
+			var  = controls.NOTE_;
 			
 			var holdControls:Array<Bool> = [left, down, up, right];
 			if (SONG.isRing)
-				holdControls = [left, down, space, up, right];
+				holdControls = [left, down, , up, right];
 
 			if (ClientPrefs.controllerMode)
 			{
@@ -4976,7 +4980,7 @@ class PlayState extends MusicBeatState
 					var controlArray:Array<Bool> = [
 						controls.NOTE_LEFT_P,
 						controls.NOTE_DOWN_P,
-						controls.NOTE_SPACE_P,
+						controls.NOTE__P,
 						controls.NOTE_UP_P,
 						controls.NOTE_RIGHT_P
 					];
@@ -5039,7 +5043,7 @@ class PlayState extends MusicBeatState
 				var controlArray:Array<Bool> = [
 					controls.NOTE_LEFT_R,
 					controls.NOTE_DOWN_R,
-					controls.NOTE_SPACE_R,
+					controls.NOTE__R,
 					controls.NOTE_UP_R,
 					controls.NOTE_RIGHT_R
 				];
