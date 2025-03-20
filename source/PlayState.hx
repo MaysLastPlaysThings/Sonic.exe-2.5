@@ -2613,13 +2613,6 @@ class PlayState extends MusicBeatState
 					});
 
 				case 'sunshine':
-					/*var startthingy:FlxSprite = new FlxSprite();
-
-					startthingy.frames = Paths.getSparrowAtlas('TdollStart', 'exe');
-					startthingy.animation.addByPrefix('sus', 'Start', 24, false);
-					startthingy.cameras = [camHUD];
-					add(startthingy);
-					startthingy.screenCenter();*/
 					var ready:FlxSprite = new FlxSprite().loadGraphic(Paths.image('ready', 'exe'));
 					var set:FlxSprite = new FlxSprite().loadGraphic(Paths.image('set', 'exe'));
 					var go:FlxSprite = new FlxSprite().loadGraphic(Paths.image('go', 'exe'));
@@ -4967,11 +4960,11 @@ class PlayState extends MusicBeatState
 			var right = controls.NOTE_RIGHT;
 			var down = controls.NOTE_DOWN;
 			var left = controls.NOTE_LEFT;
-			var  = controls.NOTE_;
+			var  = controls.NOTE_SPACE;
 			
 			var holdControls:Array<Bool> = [left, down, up, right];
 			if (SONG.isRing)
-				holdControls = [left, down, , up, right];
+				holdControls = [left, down, space, up, right];
 
 			if (ClientPrefs.controllerMode)
 			{
@@ -4980,7 +4973,7 @@ class PlayState extends MusicBeatState
 					var controlArray:Array<Bool> = [
 						controls.NOTE_LEFT_P,
 						controls.NOTE_DOWN_P,
-						controls.NOTE__P,
+						controls.NOTE_SPACE_P,
 						controls.NOTE_UP_P,
 						controls.NOTE_RIGHT_P
 					];
@@ -5043,7 +5036,7 @@ class PlayState extends MusicBeatState
 				var controlArray:Array<Bool> = [
 					controls.NOTE_LEFT_R,
 					controls.NOTE_DOWN_R,
-					controls.NOTE__R,
+					controls.NOTE_SPACE_R,
 					controls.NOTE_UP_R,
 					controls.NOTE_RIGHT_R
 				];
@@ -6121,7 +6114,7 @@ class PlayState extends MusicBeatState
 
 		#if mobile
 		mobileControls.visible = false;
-		if (ClientPrefs.isvpad && SONG.isRing && MobileControls.mode != 'Hitbox' && MobileControls.mode != 'Keyboard')
+		if (SONG.isRing && MobileControls.mode != 'Hitbox' && MobileControls.mode != 'Keyboard')
 		{
 			virtualPad.visible = true;
 		}
