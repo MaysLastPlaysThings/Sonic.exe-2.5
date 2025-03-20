@@ -223,6 +223,10 @@ class PauseSubState extends MusicBeatSubstate
 		FlxTween.tween(iconP1, {angle: 0}, 0.8, {ease: FlxEase.circOut});
 		FlxTween.tween(timeBar, {alpha: 1}, 0.5, {ease: FlxEase.circOut});
 		cameras = [camThing];
+		#if mobile
+		addVirtualPad(UP_DOWN, A);
+		addVirtualPadCamera(false);
+		#end
 	}
 
 	override function update(elapsed:Float)
@@ -288,9 +292,9 @@ class PauseSubState extends MusicBeatSubstate
 
 		super.update(elapsed);
 
-		var upP = controls.UI_UP_P || TouchInput.isSwipe('up');
-		var downP = controls.UI_DOWN_P || TouchInput.isSwipe('down');
-		var accepted = controls.ACCEPT || TouchInput.justPressed(grpMenuShit2.members[curSelected]);
+		var upP = controls.UI_UP_P;
+		var downP = controls.UI_DOWN_P;
+		var accepted = controls.ACCEPT;
 
 		if (coolDown)
 		{
