@@ -15,7 +15,6 @@ import flixel.util.FlxColor;
 import flixel.tweens.FlxEase;
 import flixel.tweens.FlxTween;
 import lime.utils.Assets;
-import mobile.utils.TouchInput;
 
 #if windows
 import Discord.DiscordClient;
@@ -97,7 +96,8 @@ class EncoreState extends MusicBeatState // REWRITE FREEPLAY!?!?!? HELL YEA!!!!!
 		 #end
 
 		add(whiteshit);
-
+    #if mobile
+    addVirtualPad(LEFT_RIGHT, A_B);
 		super.create();
 	}
 
@@ -125,22 +125,22 @@ class EncoreState extends MusicBeatState // REWRITE FREEPLAY!?!?!? HELL YEA!!!!!
 
 		if (cdman)
 		{
-			if (upP || TouchInput.isSwipe('left'))
+			if (upP)
 			{
 				changeSelection(-1);
 			}
-			if (downP || TouchInput.isSwipe('right'))
+			if (downP)
 			{
 				changeSelection(1);
 			}
 		}
 
-		if (controls.BACK || TouchInput.BACK())
+		if (controls.BACK)
 		{
 			FlxG.switchState(new MainMenuState());
 		}
 
-		if (accepted || TouchInput.justPressed(char) && cdman && songArray[0] != 'lol')
+		if (accepted && cdman && songArray[0] != 'lol')
 		{
 			cdman = false;
 
