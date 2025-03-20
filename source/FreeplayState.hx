@@ -18,7 +18,6 @@ import lime.utils.Assets;
 import flixel.system.FlxSound;
 import flixel.addons.display.FlxBackdrop;
 import flixel.addons.effects.FlxSkewedSprite;
-import mobile.utils.TouchInput;
 
 #if windows
 import Discord.DiscordClient;
@@ -163,6 +162,11 @@ class FreeplayState extends MusicBeatState // REWRITE FREEPLAY!?!?!? HELL YEA!!!
 		 #end
 
 		add(whiteshit);
+
+    #if mobile
+    addVirtualPad(UP_DOWN, A_B);
+    addVirtualPadCamera(false);
+    #end
 
 		super.create();
 	}
