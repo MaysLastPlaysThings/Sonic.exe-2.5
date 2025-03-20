@@ -176,8 +176,8 @@ class FreeplayState extends MusicBeatState // REWRITE FREEPLAY!?!?!? HELL YEA!!!
 
 		super.update(elapsed);
 
-		var upP = controls.UI_UP_P || TouchInput.isSwipe('up') || FlxG.keys.justPressed.W;
-		var downP = controls.UI_UP_P || TouchInput.isSwipe('down') || FlxG.keys.justPressed.S;
+		var upP = controls.UI_UP_P || FlxG.keys.justPressed.W;
+		var downP = controls.UI_UP_P || FlxG.keys.justPressed.S;
 		var accepted = controls.ACCEPT;
 
 		var gamepad:FlxGamepad = FlxG.gamepads.lastActive;
@@ -224,7 +224,7 @@ class FreeplayState extends MusicBeatState // REWRITE FREEPLAY!?!?!? HELL YEA!!!
 		}
 
 
-		if (accepted || TouchInput.justPressed(char) && cdman && selecting)
+		if (accepted && cdman && selecting)
 		{		
 			if (charUnlocked.contains(charArray[curSelected]))
 			{
@@ -266,7 +266,7 @@ class FreeplayState extends MusicBeatState // REWRITE FREEPLAY!?!?!? HELL YEA!!!
 				});
 			}
 		}
-		if (accepted || TouchInput.justPressed(char) && cdman && !selecting)
+		if (accepted && cdman && !selecting)
 		{
 			FlxG.sound.play(Paths.sound('scrollMenu'), 0.4);
 			selecting = true;
