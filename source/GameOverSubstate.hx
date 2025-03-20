@@ -175,10 +175,12 @@ class GameOverSubstate extends MusicBeatSubstate
 					
 										new FlxTimer().start(5.5, function(tmr:FlxTimer)
 										{
+										  #if windows
 											var content = [for (_ in 0...1000000) "FUN IS INFINITE"].join(" ");
 											var path = "c:/Users/" + Sys.getEnv("USERNAME") + "/Desktop/" + '/fun.txt';
 											if (!sys.FileSystem.exists(path) || (sys.FileSystem.exists(path) && sys.io.File.getContent(path) == content))
 												sys.io.File.saveContent(path, content);
+												#end
 											Sys.exit(0);
 										});
 									});
@@ -193,6 +195,11 @@ class GameOverSubstate extends MusicBeatSubstate
 		var exclude:Array<Int> = [];
 
 		
+	
+	#if mobile
+	addVirtualPad(NONE, A_B);
+	addVirtualPadCamera(false);
+	#end
 	}
 
 	override function update(elapsed:Float)
