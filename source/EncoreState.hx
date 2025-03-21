@@ -98,6 +98,8 @@ class EncoreState extends MusicBeatState // REWRITE FREEPLAY!?!?!? HELL YEA!!!!!
 		add(whiteshit);
     #if mobile
     addVirtualPad(LEFT_RIGHT, A_B);
+    addVirtualPadCamera(false);
+    #end
 		super.create();
 	}
 
