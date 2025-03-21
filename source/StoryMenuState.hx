@@ -279,12 +279,12 @@ class StoryMenuState extends MusicBeatState
 
 	override public function update(elapsed:Float)
 	{
-		if (controls.UI_LEFT || TouchInput.isSwipe('left') && oneclickpls)
+		if (controls.UI_LEFT && oneclickpls)
 			leftArrow.animation.play('press');
 		else
 			leftArrow.animation.play('idle');
 
-		if (controls.UI_LEFT_P || TouchInput.isSwipe('left') && oneclickpls)
+		if (controls.UI_LEFT_P && oneclickpls)
 		{
 			if (selection)
 				changeAct(-1);
@@ -292,12 +292,12 @@ class StoryMenuState extends MusicBeatState
 				changediff(-1);
 		}
 
-		if (controls.UI_RIGHT || TouchInput.isSwipe('right') && oneclickpls)
+		if (controls.UI_RIGHT && oneclickpls)
 			rightArrow.animation.play('press');
 		else
 			rightArrow.animation.play('idle');
 
-		if (controls.UI_RIGHT_P || TouchInput.isSwipe('right') && oneclickpls)
+		if (controls.UI_RIGHT_P && oneclickpls)
 		{
 			if (selection)
 				changeAct(1);
@@ -305,16 +305,16 @@ class StoryMenuState extends MusicBeatState
 				changediff(1);
 		}
 
-		if ((controls.UI_UP_P || TouchInput.isSwipe('up') && oneclickpls) || (controls.UI_DOWN_P || TouchInput.isSwipe('down') && oneclickpls))
+		if ((controls.UI_UP_P && oneclickpls) || (controls.UI_DOWN_P && oneclickpls))
 			changeSelec(); // i forgor how ifs work
 
-		if (controls.BACK || TouchInput.BACK() && oneclickpls)
+		if (controls.BACK && oneclickpls)
 		{
 			FlxG.sound.play(Paths.sound('cancelMenu'));
 			FlxG.switchState(new MainMenuState());
 		}
 
-		if (controls.ACCEPT || TouchInput.justPressed(portrait))
+		if (controls.ACCEPT)
 		{
 			if (oneclickpls)
 			{
