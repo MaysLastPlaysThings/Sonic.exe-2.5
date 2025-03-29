@@ -1889,7 +1889,7 @@ class PlayState extends MusicBeatState
 				timeBar.createFilledBar(0x00FF0000, 0xFFFF0000);
 		}
 		timeBar.createFilledBar(0xFF000000, FlxColor.RED);
-		timeBar.numDivisions = 800; // How much lag this causes?? Should i tone it down to idk, 400 or 200?
+		timeBar.numDivisions = 200; // How much lag this causes?? Should i tone it down to idk, 400 or 200?
 		timeBar.alpha = 0; // WHO THE FUCK DID THIS LAMO
 		timeBar.visible = !ClientPrefs.hideTime;
 		add(timeBar);
