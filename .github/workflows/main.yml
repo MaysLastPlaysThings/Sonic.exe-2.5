@@ -98,3 +98,22 @@ jobs:
             export/release/windows/obj/
           restore-keys: |
             cache-build-android
+  Publish:
+    needs: Android
+    runs-on: ubuntu-latest
+    permissions: write-all
+    steps:
+      - name: Download
+        uses: actions/download-artifact@main
+        with:
+           name: Sonic-Android
+           path: ${{github.workspace}}
+
+      - name: Publish
+        uses: marvinpinto/action-automatic-releases@latest
+        with:
+          repo_token: ${{secrets.GITHUB_TOKEN}}
+          prerelease: false
+          automatic_release_tag: 'v1.0.0'
+          title: 'Vs. Sonic.exe Android Port'
+          files: ${{github.workspace}}/Sonic-debug.apk
