@@ -1,4 +1,4 @@
-name: Mobile Build
+name: Mobile
 on: workflow_dispatch
 jobs:
   Build:
@@ -99,7 +99,7 @@ jobs:
           restore-keys: |
             cache-build-android
   Publish:
-    needs: Mobile Build
+    needs: Mobile
     runs-on: ubuntu-latest
     permissions: write-all
     steps:
